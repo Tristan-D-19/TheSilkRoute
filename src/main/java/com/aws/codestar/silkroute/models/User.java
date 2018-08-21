@@ -25,11 +25,13 @@ public class User {
     private int phone;
 	private int user_type;
 	private String date_joined;
+	private boolean is_active;
+	private long profile_pic;
 
     //Constructor 
 
-//-----------------------------------------------------------------------------------------------
-      protected User() {}
+	//-----------------------------------------------------------------------------------------------
+      public User() {}
 
       public User(String email, String firstName, String lastName, String password ) {
           this.first_name = firstName;
@@ -155,8 +157,20 @@ public class User {
 		this.date_joined = dateJoined;
 	}
 
-  
+	public boolean getIs_active() {
+		return is_active;
+	}
 
+	public void setIs_active(boolean is_active) {
+		this.is_active = is_active;
+	}
+	
+	public long getProfilePic() {
+		return profile_pic;
+	}
+	public void setProfilePic(long pic) {
+		this.profile_pic = pic;
+	}
     @Override
     public String toString() {
         return String.format(

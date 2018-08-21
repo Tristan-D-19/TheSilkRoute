@@ -36,16 +36,16 @@ public interface UserDAOI {
 	/**
 	 * createUser takes in a User object and creates a new User in the data base
 	 * @param user the user to be created
-	 * @return A new User with a generated ID from the database.
+	 * @return A new generated ID from the database.
 	 */
-	public User createUser(User user);
+	public long createUser(User user);
 
 	/**
 	 * createAdminUser takes in a user object and creates a new admin user
 	 * @param user the user to be created
-	 * @return A new User with a generated ID from the database.
+	 * @return A new generated ID from the database.
 	 */
-	public User createAdminUser(User user);
+	public long createAdminUser(User user);
 	/**
 	 * deleteUserById removes a deactivated user from the database if the user has already been deactivated
 	 * This function may only be called by an admin user
