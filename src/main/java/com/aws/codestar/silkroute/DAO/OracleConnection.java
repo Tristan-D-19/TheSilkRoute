@@ -22,11 +22,16 @@ public class OracleConnection{
 	final Properties prop = new Properties();
 	final InputStream inputStream = OracleConnection.class.getClassLoader()
 			.getResourceAsStream(
-					"CoreJava/Resources/db.properties");
+					"Resources/db.properties");
 	prop.load(inputStream);
 	Class.forName(prop.getProperty("driver"));
 	final Connection connection = DriverManager.getConnection(prop.getProperty("url"), 
 			prop.getProperty("user"), prop.getProperty("password"));
 	return connection;
+	}
+	public void closeConnection(Connection conn) {
+		try {
+			conn.close();
+		} catch(Exception e) {}
 	}
 }

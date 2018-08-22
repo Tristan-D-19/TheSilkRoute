@@ -7,7 +7,7 @@ public class DAO_Tester {
 	UserDAOTest userDAOT1 = new UserDAOTest();
 	
 	
-	userDAOT1.testCreateUser();
+	userDAOT1.testGetUserByEmail();
 	
 	
 	}

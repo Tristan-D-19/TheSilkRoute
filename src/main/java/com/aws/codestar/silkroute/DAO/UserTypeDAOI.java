@@ -10,7 +10,7 @@ public interface UserTypeDAOI {
 
     
     enum SQL {
-		GETUSERTYPES("SELECT * FROM TSR_USER_TYPE");
+		GETUSERTYPES("SELECT * FROM TSR_ADMIN.TSR_USER_TYPE");
 		
 		String query;
 		

@@ -1,21 +1,29 @@
 package com.aws.codestar.silkroute.DAO;
-import com.aws.codestar.silkroute.DAO.*;
 import com.aws.codestar.silkroute.models.*;
-import org.junit.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.json.JSONObject;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+// import org.junit.jupiter.api.*;
 
 public class UserDAOTest  {
 	
-	UserDAO userDAO;
+	static UserDAO userDAO;
+	static String actual = "";
 
-@BeforeClass
-public void setUp() { 
+@BeforeAll
+public static void setUp() { 
 	 userDAO = new UserDAO();
+	 actual = userDAO.getUserByEmail("test@gmail.com").getEmail();
 }
 
 @Test 
-public void testCreateUser(){
-	User expected = new User("test1@gmail.com", "test1","test1", "password");
-	Assert.assertEquals(expected.getEmail(), userDAO.getUserByEmail("test1@email.com").getEmail());
+public void testGetUserByEmail(){
+	User expected = new User("test@gmail.com", "test1","test1", "password");
+	assertEquals(expected.getEmail(), actual);
 	
     System.out.println("Testing Emails");
 }

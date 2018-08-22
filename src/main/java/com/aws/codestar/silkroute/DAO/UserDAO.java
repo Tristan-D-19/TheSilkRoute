@@ -1,12 +1,17 @@
 package com.aws.codestar.silkroute.DAO;
 import com.aws.codestar.silkroute.models.*;
 import java.util.List;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.io.*;
+import java.sql.Connection;
 
-
+/**
+ * UserDAO allows access to users from the table TSR_USERS
+ */
 public class UserDAO extends AbstractDAO implements UserDAOI {
 
 //---------------------------------------------------------------------------
@@ -100,6 +105,9 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
 				
 				
 			}
+         else {
+        	 System.err.println("ERROR NADA!");
+         }
      } catch (SQLException e) {
         
          e.printStackTrace();
@@ -116,6 +124,7 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
     public User getUserById(long userId) {
     	 User row = new User();
     	 getConnection();
+    
          try{
          PreparedStatement ps = conn.prepareStatement(SQL.GETUSERBYID.getQuery());
          ps.setLong(1, userId);
@@ -140,9 +149,11 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
 				
 			}
      } catch (SQLException e) {
-        
-         e.printStackTrace();
-     } finally {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+         finally {
          closeConnection();
      }
                   
@@ -195,14 +206,13 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
   //---------------------------------------------------------------------------
 
     @Override
-    public List<User> adminGetAllUsers(long userId) {
+    public List<User> adminGetAllUsers() {
     	List<User> users = new ArrayList<User>();
     	
     	
     	 getConnection();
          try{
          PreparedStatement ps = conn.prepareStatement(SQL.ADMINGETALLUSERS.getQuery());
-         ps.setLong(1, userId);
          ResultSet rs = ps.executeQuery();
          
          while(rs.next()) {
