@@ -1,5 +1,5 @@
 package com.aws.codestar.silkroute.models;
-
+import java.sql.Date;
 /**
  * This class is a representation of billing information for a user's account. No credit card information is stored within. 
  * We will use Stripe for processing transaction and passing this information to stripe; 
@@ -10,7 +10,30 @@ public class BillingInfo{
     private long acc_id;
     private String billing_address;
     private String billing_state; 
-    private long stripe_id;
+	private long stripe_id;
+	private Date billing_date;
+	private int billing_zip;
+
+
+	public int getBilling_zip()
+	{
+		return this.billing_zip;
+	}
+
+	public void setBilling_zip(int billing_zip)
+	{
+		this.billing_zip = billing_zip;
+	}
+
+	public Date getBilling_date()
+	{
+		return this.billing_date;
+	}
+
+	public void setBilling_date(Date billing_date)
+	{
+		this.billing_date = billing_date;
+	}
 
 	public long getBilling_id()
 	{

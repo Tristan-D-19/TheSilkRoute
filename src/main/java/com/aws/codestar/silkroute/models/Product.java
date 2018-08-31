@@ -8,7 +8,7 @@ public class Product{
     private long product_id; 
     private String product_name; 
     private long seller_id; 
-    private int department_id;
+    private long department_id;
     private int quantity;
     private double price;
     private String product_description;
@@ -43,12 +43,12 @@ public class Product{
 		this.seller_id = sellerId ;
 	}
 
-	public int getDepartment_id()
+	public long getDepartment_id()
 	{
 		return this.department_id;
 	}
 
-	public void setDepartment_id(int departmentId)
+	public void setDepartment_id(long departmentId)
 	{
 		this.department_id = departmentId;
 	}

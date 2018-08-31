@@ -22,12 +22,13 @@ public long createProductReview(long userId, long product_id, String reviewBody,
 	getConnection();
 	try{
 	PreparedStatement ps = conn.prepareStatement(SQL.CREATEPRODUCTREVIEW.getQuery(),  new String[]
-	{ "USER_ID" });
+	{ "PRODUCT_ID" });
 	ResultSet rs = null;
 	ps.setLong(1, userId);
 	ps.setLong(2, product_id);
 	ps.setString(3, reviewBody);
 	ps.setInt(4,rating);
+	
 	itWorked = ps.executeUpdate() > 0 ? true : false;
 	if(!itWorked)
 	  {
@@ -35,7 +36,7 @@ public long createProductReview(long userId, long product_id, String reviewBody,
 	  }
 	  if (rs != null && rs.next() && itWorked) 
 		{
-			productGenKey = rs.getInt(1);
+			productGenKey = rs.getLong(1);
 		}   
 } catch (SQLException e) {
    
@@ -49,16 +50,50 @@ public long createProductReview(long userId, long product_id, String reviewBody,
 }
 
 @Override
-	public List<ProductReview> getProductReviews(long productId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ProductReview>  getProductReviewsByProductId(long productId) {
+		List<ProductReview> productReviews = new ArrayList<ProductReview>();
+    	
+    	
+    	 getConnection();
+         try{
+         PreparedStatement ps = conn.prepareStatement(SQL.GETPRODUCTREVIEWSBYPRODUCTID.getQuery());
+		 ps.setLong(1, productId);
+		 ResultSet rs = ps.executeQuery();
+         
+         while(rs.next()) {
+        	 ProductReview row = new ProductReview(rs.getLong(1), rs.getLong(2), rs.getString(3), rs.getInt(4), rs.getDate(5));
+				productReviews.add(row);	
+			}
+     } catch (SQLException e) {
+        
+         e.printStackTrace();
+     } finally {
+         closeConnection();
+     }
+         return productReviews;
 	}
 
 
 	@Override
 	public boolean deleteProductReviewById(long review_id) {
-		return false;
+		boolean itWorked = false;
+		getConnection();
+		try{
+		PreparedStatement ps = conn.prepareStatement(SQL.DELETEPRODUCTREVIEWBYID.getQuery());
+		ps.setLong(1, review_id);
+		itWorked = ps.executeUpdate() > 0 ? true : false;
+		
+	
+	} catch (SQLException e) {
+	   
+		e.printStackTrace();
+	} finally {
+		closeConnection();
 	}
+		return itWorked;
+   }
+
+}
 
 	
-}
+

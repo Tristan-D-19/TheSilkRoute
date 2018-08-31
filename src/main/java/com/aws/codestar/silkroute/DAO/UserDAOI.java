@@ -5,22 +5,23 @@ import java.util.List;
 
 
 /**
- * UserDAOI is an interface for crud operations to the TSR_USER table. 
+ * UserDAOI is an interface for CRUD operations to the TSR_USER table. 
  */
 public interface UserDAOI { 
 
     
     enum SQL {
-		CREATEUSER("INSERT INTO TSR_ADMIN.TSR_USER (EMAIL, FIRST_NAME, LAST_NAME, ENCRYTED_PASSWORD, USER_TYPE, ACTIVE ) VALUES (?,?,?,?,0, 1)"),
-		CREATEADMINUSER("INSERT INTO TSR_ADMIN.TSR_USER (EMAIL, FIRST_NAME, LAST_NAME, ENCRYTED_PASSWORD, USER_TYPE, ACTIVE ) VALUES (?,?,?,?,1, 1)"),
-		DELETEUSERBYID("DELETE FROM TSR_ADMIN.TSR_USER WHERE USER_ID=?, ACTIVE=0"),
-		DEACTIVATEUSER("UPDATE TSR_ADMIN.TSR_USER SET ACTIVE =0 WHERE USER_ID=?"), 
+		CREATEUSER("INSERT INTO TSR_ADMIN.TSR_USER (EMAIL, FIRST_NAME, LAST_NAME, ENCRYPTED_PASSWORD, USER_TYPE, ACTIVE ) VALUES (?,?,?,?,0,1)"),
+		CREATEADMINUSER("INSERT INTO TSR_ADMIN.TSR_USER (EMAIL, FIRST_NAME, LAST_NAME, ENCRYPTED_PASSWORD, USER_TYPE, ACTIVE ) VALUES (?,?,?,?,1, 1)"),
+		DELETEUSERBYID("DELETE FROM TSR_ADMIN.TSR_USER WHERE USER_ID=?"),
+		DEACTIVATEUSER("UPDATE TSR_ADMIN.TSR_USER SET ACTIVE =0 WHERE USER_ID=?"),
+		REACTIVATEUSER("UPDATE TSR_ADMIN.TSR_USER SET ACTIVE =1 WHERE USER_ID=?"),
 		UPDATEUSER("UPDATE TSR_ADMIN.TSR_USER SET EMAIL=?, FIRST_NAME=?, LAST_NAME=?, ADDRESS=?,CITY=?, STATE=?, ZIPCODE=?, PHONE NUMBER =?,PROFILE_PIC=?"),
 		GETALLUSERS("SELECT EMAIL, FIRST_NAME, ZIPCODE, PROFILE_PIC FROM TSR_ADMIN.TSR_USER"),
 		ADMINGETALLUSERS("SELECT * FROM TSR_ADMIN.TSR_USER"), 
 		GETUSERBYID("SELECT * FROM TSR_ADMIN.TSR_USER WHERE USER_ID=?"),
 		GETUSERBYEMAIL("select * from tsr_admin.tsr_user where EMAIL=?"),
-		CHANGEUSERPASSWORD("UPDATE TSR_ADMIN.TSR_USER SET ENCRYTED_PASSWORD=? WHERE USER_ID=");
+		CHANGEUSERPASSWORD("UPDATE TSR_ADMIN.TSR_USER SET ENCRYPTED_PASSWORD=? WHERE USER_ID=");
 		
 		String query;
 		
@@ -61,6 +62,14 @@ public interface UserDAOI {
 	 */
 	public boolean deactivateUser(long userId);
 
+	/**
+	 * reactivateUser reactivates a user from using the application 
+	 * @param userId the user's Id
+	 * @return a boolean indicating the user is reactivated
+	 */
+	public boolean reactivateUser(long userId);
+
+	
 	/**
 	 * updateUser updates a user's information in the database
 	 * @param user a user object with all of the data to be updated.

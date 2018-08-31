@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class UserTypeDAO extends AbstractDAO implements UserTypeDAOI{ 
 
-    
+//------------------------------------------------------------------------------------  
 @Override
 public List<UserType> getUserTypes() {
     List<UserType> user_types = new ArrayList<UserType>();

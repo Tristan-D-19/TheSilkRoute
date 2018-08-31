@@ -30,8 +30,8 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
         ps.setString(2, user.getFirst_name());
         ps.setString(3, user.getLastname());
         ps.setString(4, user.getPassword());
-        itWorked = ps.executeUpdate() > 0 ? true : false;
-        if(!itWorked)
+        itWorked = (ps.executeUpdate() > 0) ? true : false;
+        if(itWorked)
           {
          rs = ps.getGeneratedKeys();  
           }
@@ -95,13 +95,14 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
 				row.setFirstname(rs.getString(4));
 				row.setLastname(rs.getString(5));
 				row.setPassword(rs.getString(6));
-				row.setDate_joined(rs.getString(7));
+				row.setDate_joined(rs.getDate(7));
 				row.setAddress(rs.getString(8));
 				row.setCity(rs.getString(9));
 				row.setState(rs.getString(10));
 				row.setZipcode(rs.getInt(11));
 				row.setPhone(rs.getInt(12));
-				row.setUser_type(rs.getInt(14));
+				row.setUser_type(rs.getInt(13));
+				row.setProfilePic(rs.getLong(14));
 				
 				
 			}
@@ -132,19 +133,20 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
          
          if(rs.next()) {
 				
-				row.setId(rs.getLong(1));
+        	 	row.setId(rs.getLong(1));
 				row.setIs_active(rs.getBoolean(2));
 				row.setEmail(rs.getString(3));
 				row.setFirstname(rs.getString(4));
 				row.setLastname(rs.getString(5));
 				row.setPassword(rs.getString(6));
-				row.setDate_joined(rs.getString(7));
+				row.setDate_joined(rs.getDate(7));
 				row.setAddress(rs.getString(8));
 				row.setCity(rs.getString(9));
 				row.setState(rs.getString(10));
 				row.setZipcode(rs.getInt(11));
 				row.setPhone(rs.getInt(12));
-				row.setUser_type(rs.getInt(14));
+				row.setUser_type(rs.getInt(13));
+				row.setProfilePic(rs.getLong(14));
 				
 				
 			}
@@ -184,6 +186,29 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
   //---------------------------------------------------------------------------
 
     @Override
+    public boolean reactivateUser(long userId) {
+    	 boolean itWorked = false;
+    	 getConnection();
+         try{
+         PreparedStatement ps = conn.prepareStatement(SQL.REACTIVATEUSER.getQuery());
+         ps.setLong(1, userId);
+         itWorked = ps.executeUpdate() > 0 ? true : false;
+         
+       
+     } catch (SQLException e) {
+        
+         e.printStackTrace();
+     } finally {
+         closeConnection();
+     }
+    	
+    	return itWorked;
+        
+    }  
+    
+  //---------------------------------------------------------------------------
+
+    @Override
     public boolean deleteUserById(long userId) {
     	 boolean itWorked = false;
     	 getConnection();
@@ -200,7 +225,7 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
          closeConnection();
      }
     	
-    	return false;
+    	return itWorked;
         
     }
   //---------------------------------------------------------------------------
@@ -217,19 +242,20 @@ public class UserDAO extends AbstractDAO implements UserDAOI {
          
          while(rs.next()) {
         	 User row = new User();
-				row.setId(rs.getLong(1));
+        	 	row.setId(rs.getLong(1));
 				row.setIs_active(rs.getBoolean(2));
 				row.setEmail(rs.getString(3));
 				row.setFirstname(rs.getString(4));
 				row.setLastname(rs.getString(5));
 				row.setPassword(rs.getString(6));
-				row.setDate_joined(rs.getString(7));
+				row.setDate_joined(rs.getDate(7));
 				row.setAddress(rs.getString(8));
 				row.setCity(rs.getString(9));
 				row.setState(rs.getString(10));
 				row.setZipcode(rs.getInt(11));
 				row.setPhone(rs.getInt(12));
-				row.setUser_type(rs.getInt(14));
+				row.setUser_type(rs.getInt(13));
+				row.setProfilePic(rs.getLong(14));
 				users.add(row);	
 			}
      } catch (SQLException e) {

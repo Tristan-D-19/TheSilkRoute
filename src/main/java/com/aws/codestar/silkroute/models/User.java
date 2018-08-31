@@ -1,4 +1,5 @@
 package com.aws.codestar.silkroute.models;
+import java.sql.Date;
 // import javax.persistence.Entity;
 // import javax.persistence.GeneratedValue;
 // import javax.persistence.GenerationType;
@@ -24,7 +25,7 @@ public class User {
     private String state; 
     private int phone;
 	private int user_type;
-	private String date_joined;
+	private Date date_joined;
 	private boolean is_active;
 	private long profile_pic;
 
@@ -150,10 +151,10 @@ public class User {
 		this.user_type = userType;
 	}
 
-	public String getDate_joined(){
+	public Date getDate_joined(){
 		return date_joined;
 	}
-	public void setDate_joined(String dateJoined) {
+	public void setDate_joined(Date dateJoined) {
 		this.date_joined = dateJoined;
 	}
 
@@ -176,6 +177,32 @@ public class User {
         return String.format(
                 "User[id=%d, firstName='%s', lastName='%s']",
                 id, first_name, last_name);
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+    	if (obj instanceof User) {
+    		User other = (User) obj;
+    		boolean same_id = (this.id == other.getId());
+    	    boolean same_f_name = (this.first_name == other.getFirst_name());
+    	    boolean same_l_name = (this.last_name == other.getLastname());
+    	    boolean same_email = (this.email == other.getEmail());
+    	    boolean same_pass = (this.password == other.getPassword());
+    	    boolean same_address = (this.address == other.getAddress());
+    	    boolean same_city = (this.city == other.getCity());
+    	    boolean same_zip = (this.zipcode == other.getZipcode());
+    	    boolean same_phone = (this.phone == other.getPhone());
+    	    boolean same_u_type = (this.user_type == other.getUser_type());
+    	    boolean same_date_joined = (this.date_joined == other.getDate_joined());
+    	    boolean same_pic = (this.profile_pic == other.getProfilePic());
+    	    	
+    	    if(same_address && same_city && same_date_joined && same_email && 
+    	    		same_f_name && same_l_name && same_id && same_pass && same_phone &&
+    	    		same_u_type && same_zip && same_pic) return true;
+    	    		else return false;
+    	}
+    	else return false;
+    
     }
 
 }

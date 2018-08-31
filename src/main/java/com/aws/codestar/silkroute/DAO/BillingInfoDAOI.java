@@ -12,7 +12,8 @@ public interface BillingInfoDAOI {
 
     enum SQL {
 		GETBILLINGIINFOBYACCOUNTID("SELECT * FROM TSR_ADMIN.TSR_BILLING_INFO WHERE ACC_ID=?"),
-		CREATEBILLINGINFO("INSERT INTO TSR_ADMIN.TSR_BILLING_INFO (ACC_ID, BILLING_STATE, BILLING_ZIP) VALUES (?,?,?)");
+    CREATEBILLINGINFO("INSERT INTO TSR_ADMIN.TSR_BILLING_INFO (ACC_ID, BILLING_STATE, BILLING_ZIP) VALUES (?,?,?)"), 
+    DELETEBILLINGINFOBYID("DELETE FROM TSR_ADMIN.TSR_BILLING_INFO WHERE BILLING_ID=?");
 		
 		String query;
 		
@@ -43,4 +44,12 @@ public interface BillingInfoDAOI {
      */
     public boolean createBillingInfo(long accId, String billingState, int billingZip);
 
+
+    /**
+     * deleteBillingInfoByID deletes a user's billing info by ID 
+     * @param billingId the billing id 
+     * @return boolean indicating the removal was successful 
+     */
+
+     public boolean deleteBillingInfoById(long billingId);
 }

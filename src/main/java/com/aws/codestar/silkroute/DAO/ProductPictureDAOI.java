@@ -27,9 +27,9 @@ public interface ProductPictureDAOI {
 	/**
 	 * getPicturesByProduct gets a list of product pictures 
 	 * @param productId the product's ID 
-	 * @return a list of Pictures type List
+	 * @return a list of Product Pictures type List
 	 */
-	public List<Picture> getPicturesByProduct(long productId);
+	public List<ProductPicture> getPicturesByProduct(long productId);
 
 	/**
 	 * createNewProductPicture creates a new picture for a product 

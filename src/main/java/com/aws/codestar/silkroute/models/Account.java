@@ -7,7 +7,7 @@ package com.aws.codestar.silkroute.models;
 public class Account {
     private long account_id;
     private long user_id;
-    private float balance; 
+    private double balance; 
 
 
     public Account(long accountId, long userId){ 
@@ -35,12 +35,12 @@ public class Account {
 		this.user_id = userId;
 	}
 
-	public float getBalance()
+	public double getBalance()
 	{
 		return this.balance;
 	}
 
-	public void setBalance(float balance )
+	public void setBalance(double balance )
 	{
 		this.balance = balance ;
 	}

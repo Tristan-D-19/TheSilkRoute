@@ -11,7 +11,7 @@ public interface ProductReviewDAOI {
     
     enum SQL {
 		CREATEPRODUCTREVIEW("INSERT INTO TSR_ADMIN.TSR_PRODUCT_REVIEW (USER_ID, PRODUCT_ID, REVIEW_ID, RATING) VALUES (?,?,?,?)"),
-		GETPRODUCTREVIEWBYPRODUCT("SELECT * FROM TSR_ADMIN.TSR_PRODUCT_REVIEW WHERE PRODUCT_ID=?"), 
+		GETPRODUCTREVIEWSBYPRODUCTID("SELECT * FROM TSR_ADMIN.TSR_PRODUCT_REVIEW WHERE PRODUCT_ID=?"), 
 		DELETEPRODUCTREVIEWBYID("DELETE FROM TSR_ADMIN.TSR_PRODUCT_REVIEW WHERE REVIEW_ID=?");
 		
 		String query;
@@ -26,11 +26,11 @@ public interface ProductReviewDAOI {
 	}
 	
 	/**
-	 * getProductReview gets all product reviews for a product 
+	 * getProductReviewsByProductId gets all product reviews for a product 
 	 * @param productId the product's ID 
 	 * @return a list of ProductReviews type List 
 	 */
-	public List<ProductReview> getProductReviews(long productId);
+	public List<ProductReview> getProductReviewsByProductId(long productId);
 
 	/**
 	 * createProductReview creates a product review for a product

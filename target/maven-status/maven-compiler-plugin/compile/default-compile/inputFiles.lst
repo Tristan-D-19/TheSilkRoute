@@ -12,6 +12,7 @@
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/UserDAOI.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/UserDAO.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/OrderDetailDAOI.java
+/mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/DepartmentDAO.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/ProductReview.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/ProductPictureDAO.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/Order.java
@@ -20,12 +21,17 @@
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/ProductPicture.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/BillingInfoDAOI.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/User.java
+/mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/OrderDAO.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/OracleConnection.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/OrderDetail.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/Product.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/Department.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/ProductDAOI.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/BillingInfo.java
+/mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/BillingInfoDAO.java
+/mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/AccountDAO.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/PictureDAOI.java
-/mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/DAO/ProductDAOI.java
+/mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/ProductDAO.java
 /mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/models/UserType.java
+/mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/OrderDetailDAO.java
+/mnt/c/Users/Tristan/Documents/Codes/Java/Java_Apps/TheSilkRoute/src/main/java/com/aws/codestar/silkroute/DAO/PictureDAO.java

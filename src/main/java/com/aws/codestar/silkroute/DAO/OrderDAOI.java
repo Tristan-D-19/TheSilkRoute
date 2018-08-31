@@ -1,7 +1,7 @@
 package com.aws.codestar.silkroute.DAO;
 import com.aws.codestar.silkroute.models.*;
 import java.util.List;
-
+import java.sql.Date;
 
 
 
@@ -39,7 +39,7 @@ public interface OrderDAOI{
      * @param date the date of the order(s)
      * @return a List of Orders type List
      */
-    public List<Order> getOrdersByDate(String date);
+    public List<Order> getOrdersByDate(Date date);
 
     /**
      * getOrderByid returns an order specified by the ID
