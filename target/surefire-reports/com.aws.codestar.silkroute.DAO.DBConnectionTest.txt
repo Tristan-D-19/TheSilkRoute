@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.aws.codestar.silkroute.DAO.DBConnectionTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.714 sec - in com.aws.codestar.silkroute.DAO.DBConnectionTest
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 3.48 sec <<< FAILURE! - in com.aws.codestar.silkroute.DAO.DBConnectionTest
+testConnection()  Time elapsed: 3.32 sec  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: not <null>
+	at com.aws.codestar.silkroute.DAO.DBConnectionTest.testConnection(DBConnectionTest.java:36)
+

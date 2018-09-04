@@ -1,4 +1,36 @@
 -------------------------------------------------------------------------------
 Test set: com.aws.codestar.silkroute.DAO.UserDAOTest
 -------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.339 sec - in com.aws.codestar.silkroute.DAO.UserDAOTest
+Tests run: 8, Failures: 0, Errors: 8, Skipped: 0, Time elapsed: 17.254 sec <<< FAILURE! - in com.aws.codestar.silkroute.DAO.UserDAOTest
+testGetUserByEmail()  Time elapsed: 1.786 sec  <<< ERROR!
+java.lang.NullPointerException
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testGetUserByEmail(UserDAOTest.java:55)
+
+testDeactivateUserById()  Time elapsed: 2.245 sec  <<< ERROR!
+java.lang.NullPointerException
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testDeactivateUserById(UserDAOTest.java:110)
+
+testGetAllUsers()  Time elapsed: 2.2 sec  <<< ERROR!
+java.lang.NullPointerException
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testGetAllUsers(UserDAOTest.java:83)
+
+testAdminGetAllUsers()  Time elapsed: 2.175 sec  <<< ERROR!
+java.lang.NullPointerException
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testAdminGetAllUsers(UserDAOTest.java:71)
+
+testCreateUser()  Time elapsed: 2.237 sec  <<< ERROR!
+java.lang.NullPointerException
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testCreateUser(UserDAOTest.java:44)
+
+testDeleteUser()  Time elapsed: 2.201 sec  <<< ERROR!
+java.lang.NullPointerException
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testDeleteUser(UserDAOTest.java:93)
+
+testGetUserById()  Time elapsed: 2.197 sec  <<< ERROR!
+java.lang.NullPointerException
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testGetUserById(UserDAOTest.java:101)
+
+testReactivateUserById()  Time elapsed: 2.202 sec  <<< ERROR!
+java.lang.NullPointerException
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testReactivateUserById(UserDAOTest.java:117)
+
