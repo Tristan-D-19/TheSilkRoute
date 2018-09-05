@@ -1,16 +1,27 @@
 package com.aws.codestar.silkroute.models;
 
+import javax.persistence.*;
 
+@Entity
 public class OrderDetail{ 
-
+	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+     @SequenceGenerator(name = "order_det_id_gen", sequenceName = "order_det_id_gen", initialValue = 50000000, allocationSize = 100)
     private long order_id;
-    private long product_id;
-    private double price;
+	 
+	@OneToOne 
+    private Product product;
+   
+
+	@Column(name="price")
+	private double price;
+	
+	@Column(name="quantity")
     private int order_quantity;
 
-    public OrderDetail(long order_id, long product_id){
+    public OrderDetail(long order_id, Product product){
         this.order_id = order_id;
-        this.product_id = product_id;
+        this.product = product;
     }
 	public long getOrder_id()
 	{
@@ -21,16 +32,14 @@ public class OrderDetail{
 	{
 		this.order_id = order_id;
 	}
-
-	public long getProduct_id()
-	{
-		return this.product_id;
+	
+ public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public void setProduct_id(long product_id)
-	{
-		this.product_id = product_id;
-	}
 
 	public double getPrice()
 	{

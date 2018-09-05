@@ -1,17 +1,39 @@
 package com.aws.codestar.silkroute.models;
 import java.sql.Date;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 /**
  * This class is a representation of billing information for a user's account. No credit card information is stored within. 
  * We will use Stripe for processing transaction and passing this information to stripe; 
  */
+
+@Entity
 public class BillingInfo{ 
 
+	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+   @SequenceGenerator(name = "billing_id_gen", sequenceName = "billing_id_gen", initialValue = 50000000, allocationSize = 100)
     private long billing_id;
-    private long acc_id;
+	
+	@ManyToOne
+    private Account account;
+	
+	@Column(name="billing_address")
     private String billing_address;
+	
+	@Column(name="billing_state")
     private String billing_state; 
+	
+	@Column(name="stripe_id")
 	private long stripe_id;
+	@Column(name="billing_date")
 	private Date billing_date;
+	
+	@Column(name="billing_zip")
 	private int billing_zip;
 
 
@@ -45,14 +67,14 @@ public class BillingInfo{
 		this.billing_id = billing_id;
 	}
 
-	public long getAcc_id()
+	public Account getAccount()
 	{
-		return this.acc_id;
+		return this.account;
 	}
 
-	public void setAcc_id(long acc_id)
+	public void setAcc_id(Account account)
 	{
-		this.acc_id = acc_id;
+		this.account = account;
 	}
 
 	public String getBilling_address()

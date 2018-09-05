@@ -1,12 +1,24 @@
 package com.aws.codestar.silkroute.models;
-
+import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Blob;
+
+@Entity
 public class Picture{
 
+	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+     @SequenceGenerator(name = "pic_id_gen", sequenceName = "pic_id_gen", initialValue = 50000000, allocationSize = 100)
     private long picture_id;
-    private long owner_id;
-    private Date creation_date;
+	 
+	 
+	 @ManyToOne
+    private User user;
+ 
+	 @Column(name="creation_date")
+	private Date creation_date;
+	 
+	 @Column(name="image")
 	private Blob image;
 
 	
@@ -19,7 +31,13 @@ public class Picture{
 	{
 		this.image = image;
 	}
-
+	public User getUser() {
+			return user;
+		}
+	
+		public void setUser(User user) {
+			this.user = user;
+		}
 	public long getPicture_id()
 	{
 		return this.picture_id;
@@ -30,16 +48,7 @@ public class Picture{
 		this.picture_id = picture_id;
 	}
 
-	public long getOwner_id()
-	{
-		return this.owner_id;
-	}
-
-	public void setOwner_id(long owner_id)
-	{
-		this.owner_id = owner_id;
-	}
-
+	
 	public Date getCreation_date()
 	{
 		return this.creation_date;

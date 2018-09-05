@@ -8,6 +8,7 @@ C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\a
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\ProductPictureDAO.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\UserDAO.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\OrderDetailDAO.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\controller\LoginController.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\Account.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\Order.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\BillingInfoDAO.java
@@ -23,6 +24,7 @@ C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\a
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\ProductReviewDAOI.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\ProductDAOI.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\OrderDAO.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\controller\IndexController.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\PictureDAO.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\UserTypeDAOI.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\ProductPicture.java

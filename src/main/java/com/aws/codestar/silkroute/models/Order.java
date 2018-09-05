@@ -1,20 +1,51 @@
 package com.aws.codestar.silkroute.models;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.*;
 /**
  * This class represents the orders for a customer's purchase
  * 
  */
+
+@Entity
 public class Order{
 
+	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+    @SequenceGenerator(name = "order_id_gen", sequenceName = "order_id_gen", initialValue = 50000000, allocationSize = 100)
     private long order_id;
-    private long customer_id;
+	
+	@OneToOne
+    private User customer;
+	
+	@Column(name="creation_date")
     private Date creation_date;
+	
+	@Column(name="shipping_date")
     private Date shipping_date;
+	
+	@Column(name="order_price")
     private double order_price;
+    
+    @OneToMany
+    private List<OrderDetail> items = new ArrayList<OrderDetail>();
 
-    //create a new order with the customers id and the current date
+    public User getCustomer() {
+		return customer;
+	}
+	public void setCustomer(User customer) {
+		this.customer = customer;
+	}
+	public List<OrderDetail> getItems() {
+		return items;
+	}
+	public void setItems(List<OrderDetail> items) {
+		this.items = items;
+	}
+	//create a new order with the customers id and the current date
     public Order(long customer_id, Date creationDate){
 
     }
@@ -28,15 +59,6 @@ public class Order{
 		this.order_id = order_id;
 	}
 
-	public long getCustomer_id()
-	{
-		return this.customer_id;
-	}
-
-	public void setCustomer_id(long customer_id){
-	
-		this.customer_id = customer_id;
-	}
 
 	public Date getCreation_date()
 	{
