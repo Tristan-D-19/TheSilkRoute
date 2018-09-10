@@ -1,11 +1,19 @@
 package com.aws.codestar.silkroute.models;
 import java.sql.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 /**
  * This class is a representation of billing information for a user's account. No credit card information is stored within. 
  * We will use Stripe for processing transaction and passing this information to stripe; 
  */
+
+@Entity
 public class BillingInfo{ 
 
+	@Id 
+	@Column
     private long billing_id;
     private long acc_id;
     private String billing_address;

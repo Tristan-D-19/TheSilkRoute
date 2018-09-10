@@ -5,9 +5,9 @@ com\aws\codestar\silkroute\DAO\ProductReviewDAOI$SQL.class
 com\aws\codestar\silkroute\models\ProductReview.class
 com\aws\codestar\silkroute\DAO\OrderDetailDAOI.class
 com\aws\codestar\silkroute\models\OrderDetail.class
+com\aws\codestar\silkroute\controller\MvcConfig.class
 com\aws\codestar\silkroute\DAO\OrderDAO.class
 com\aws\codestar\silkroute\DAO\AccountDAOI$SQL.class
-com\aws\codestar\silkroute\controller\HelloWorldController.class
 com\aws\codestar\silkroute\DAO\ProductReviewDAOI.class
 com\aws\codestar\silkroute\DAO\PictureDAO.class
 com\aws\codestar\silkroute\DAO\BillingInfoDAO.class
@@ -35,10 +35,12 @@ com\aws\codestar\silkroute\DAO\UserDAO.class
 com\aws\codestar\silkroute\DAO\DepartmentDAO.class
 com\aws\codestar\silkroute\DAO\AccountDAOI.class
 com\aws\codestar\silkroute\Application.class
+com\aws\codestar\silkroute\controller\IndexController.class
 com\aws\codestar\silkroute\DAO\DepartmentDAOI$SQL.class
 com\aws\codestar\silkroute\models\Order.class
 com\aws\codestar\silkroute\DAO\UserTypeDAOI.class
 com\aws\codestar\silkroute\models\User.class
+com\aws\codestar\silkroute\controller\LoginController.class
 com\aws\codestar\silkroute\DAO\UserDAOI$SQL.class
 com\aws\codestar\silkroute\DAO\UserTypeDAOI$SQL.class
 com\aws\codestar\silkroute\DAO\ProductReviewDAO.class

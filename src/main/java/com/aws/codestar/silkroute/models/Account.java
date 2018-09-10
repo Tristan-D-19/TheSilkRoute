@@ -1,12 +1,26 @@
 package com.aws.codestar.silkroute.models;
 
+import javax.persistence.*;
+
 /**
  * This Class is a representation of a user's account. The account handles transactions and other financial information. 
  *
  */
+
+@Entity
+@Table(name="tsr_account")
 public class Account {
+	
+	@Id
+	@Column
     private long account_id;
+	
+	@Basic
+	@Column
     private long user_id;
+	
+	@Basic 
+	@Column
     private double balance; 
 
 

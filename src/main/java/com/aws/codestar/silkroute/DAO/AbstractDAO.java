@@ -20,7 +20,7 @@ abstract class AbstractDAO {
 			
 			conn = DriverManager.getConnection(url, user, pass);
 			if(conn == null) {
-				System.out.println("WTF");
+				System.out.println("ISSUE CONNECTING TO DB");
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
