@@ -4,23 +4,29 @@ import java.sql.Date;
 import java.sql.Blob;
 
 @Entity
+@Table(name="tsr_picture")
 public class Picture{
 
 	@Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-     @SequenceGenerator(name = "pic_id_gen", sequenceName = "pic_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long picture_id;
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	 @GeneratedValue(strategy=GenerationType.AUTO)
+//     @SequenceGenerator(name = "pic_id_gen", sequenceName = "pic_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long pictureId;
 	 
 	 
 	 @ManyToOne
     private User user;
  
-	 @Column(name="creation_date")
-	private Date creation_date;
+	 @Column(name="creation_date", nullable=false)
+	private Date creationDate;
 	 
-	 @Column(name="image")
+	 @Column(name="image", nullable=false)
 	private Blob image;
 
+	
+	public Picture() {
+		
+	}
 	
 	public Blob getImage()
 	{
@@ -38,24 +44,24 @@ public class Picture{
 		public void setUser(User user) {
 			this.user = user;
 		}
-	public long getPicture_id()
+	public long getPictureId()
 	{
-		return this.picture_id;
+		return this.pictureId;
 	}
 
-	public void setPicture_id(long picture_id)
+	public void setPictureId(long pictureId)
 	{
-		this.picture_id = picture_id;
+		this.pictureId = pictureId;
 	}
 
 	
-	public Date getCreation_date()
+	public Date getCreationDate()
 	{
-		return this.creation_date;
+		return this.creationDate;
 	}
 
-	public void setCreation_date(Date creation_date)
+	public void setCreationDate(Date creationDate)
 	{
-		this.creation_date = creation_date;
+		this.creationDate = creationDate;
 	}
 }

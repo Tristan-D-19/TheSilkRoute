@@ -11,24 +11,30 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name="tsr_order")
 public class Order{
 
 	@Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-    @SequenceGenerator(name = "order_id_gen", sequenceName = "order_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long order_id;
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	 @GeneratedValue(strategy=GenerationType.AUTO)
+//    @SequenceGenerator(name = "order_id_gen", sequenceName = "order_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long orderId;
+	
+	protected Order() {
+		
+	}
 	
 	@OneToOne
     private User customer;
 	
-	@Column(name="creation_date")
-    private Date creation_date;
+	@Column(name="creation_date", nullable=false)
+    private Date creationDate;
 	
 	@Column(name="shipping_date")
-    private Date shipping_date;
+    private Date shippingDate;
 	
-	@Column(name="order_price")
-    private double order_price;
+	@Column(name="order_price", nullable=false)
+    private double orderPrice;
     
     @OneToMany
     private List<OrderDetail> items = new ArrayList<OrderDetail>();
@@ -49,45 +55,45 @@ public class Order{
     public Order(long customer_id, Date creationDate){
 
     }
-	public long getOrder_id()
+	public long getOrderId()
 	{
-		return this.order_id;
+		return this.orderId;
 	}
 
-	public void setOrder_id(long order_id)
+	public void setOrderId(long orderId)
 	{
-		this.order_id = order_id;
+		this.orderId = orderId;
 	}
 
 
-	public Date getCreation_date()
+	public Date getCreationDate()
 	{
-		return this.creation_date;
+		return this.creationDate;
 	}
 
-	public void setCreation_date(Date creation_date)
+	public void setCreationDate(Date creationDate)
 	{
-		this.creation_date = creation_date;
+		this.creationDate = creationDate;
 	}
 
-	public Date getShipping_date()
+	public Date getShippingDate()
 	{
-		return this.shipping_date;
+		return this.shippingDate;
 	}
 
-	public void setShipping_date(Date shipping_date)
+	public void setShippingDate(Date shippingDate)
 	{
-		this.shipping_date = shipping_date;
+		this.shippingDate = shippingDate;
 	}
 
-	public double getOrder_price()
+	public double getOrderPrice()
 	{
-		return this.order_price;
+		return this.orderPrice;
 	}
 
-	public void setOrder_price(double order_price)
+	public void setOrderPrice(double orderPrice)
 	{
-		this.order_price = order_price;
+		this.orderPrice = orderPrice;
 	}
 
 

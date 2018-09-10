@@ -7,12 +7,14 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tsr_product_review")
 public class ProductReview{
 
 	@Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-     @SequenceGenerator(name = "review_id_gen", sequenceName = "review_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long review_id;
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	 @GeneratedValue(strategy=GenerationType.AUTO)
+//     @SequenceGenerator(name = "review_id_gen", sequenceName = "review_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long reviewId;
 	 
 	 @OneToOne
 	private User user;
@@ -20,22 +22,26 @@ public class ProductReview{
 	 @OneToOne
 	private Product product;
 	 
-	 @Column(name="review_body")
-    private String review_body;
-	 @Column(name="rating")
+	 @Column(name="review_body", nullable=false)
+    private String reviewBody;
+	 @Column(name="rating", nullable=false)
 	private int rating;
 	 
-	 @Column(name="creation_date")
-	private Date creation_date;
+	 @Column(name="creation_date", nullable=false)
+	private Date creationDate;
 
 
 
+	protected ProductReview() {
+		
+	}
+	
     public ProductReview(User user, Product product, String review_body, int rating, Date creation_date){
         this.user = user;
-        this.review_body = review_body;
+        this.reviewBody = review_body;
 		this.rating = rating;
 		this.product = product;
-		this.creation_date = creation_date;
+		this.creationDate = creation_date;
 
 	}
 	public User getUser() {
@@ -50,41 +56,41 @@ public class ProductReview{
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public String getReview_body() {
-		return review_body;
+	public String getReviewBody() {
+		return reviewBody;
 	}
-	public void setReview_body(String review_body) {
-		this.review_body = review_body;
+	public void setReviewBody(String reviewBody) {
+		this.reviewBody = reviewBody;
 	}
 	
 	public long getReview_id()
 	{
-		return this.review_id;
+		return this.reviewId;
 	}
 
-	public Date getCreation_date()
+	public Date getCreationDate()
 	{
-		return this.creation_date;
+		return this.creationDate;
 	}
 
-	public void setCreation_date(Date creation_date)
+	public void setCreationDate(Date creationDate)
 	{
-		this.creation_date = creation_date;
+		this.creationDate = creationDate;
 	}
 
-	public void setReview_id(long review_id)
+	public void setReviewId(long reviewId)
 	{
-		this.review_id = review_id;
+		this.reviewId = reviewId;
 	}
 
 	public String getReviewbody()
 	{
-		return this.review_body;
+		return this.reviewBody;
 	}
 
 	public void setReviewbody(String reviewBody)
 	{
-		this.review_body = reviewBody;
+		this.reviewBody = reviewBody;
 	}
 
 	public int getRating()

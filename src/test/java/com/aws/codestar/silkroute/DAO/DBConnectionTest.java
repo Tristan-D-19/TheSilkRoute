@@ -21,7 +21,7 @@ import java.sql.Connection;
 
 public class DBConnectionTest extends AbstractDAO {
 	
-	UserDAO userDAO;
+	
 	String actual = "";
 
 @BeforeAll

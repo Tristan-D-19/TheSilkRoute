@@ -8,35 +8,55 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tsr_user_type")
 public class UserType{
 
 	@Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-    @SequenceGenerator(name = "user_type_id_gen", sequenceName = "user_type_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long type_id;
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	 @GeneratedValue(strategy=GenerationType.AUTO)
+//    @SequenceGenerator(name = "user_type_id_gen", sequenceName = "user_type_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long typeId;
 	
 	@Column(name="type_name")
-    private String type_name;
+    private String typeName;
 
+	@Column(name="user_type")
+	private int userType;
 	
-	public long getType_id()
+	public UserType() {
+	this.typeName = "customer";
+	this.userType = 0;
+	}
+	
+	
+	public long getTypeId()
 	{
-		return this.type_id;
+		return this.typeId;
 	}
 
-	public void setType_id(long type_id)
+	public void setTypeId(long typeId)
 	{
-		this.type_id = type_id;
+		this.typeId = typeId;
 	}
 
-	public String getType_name()
+	public String getTypeName()
 	{
-		return this.type_name;
+		return this.typeName;
 	}
 
-	public void setType_name(String type_name)
+	public void setTypeName(String typeName)
 	{
-		this.type_name = type_name;
+		this.typeName = typeName;
+	}
+
+
+	public int getUserType() {
+		return userType;
+	}
+
+
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 
 

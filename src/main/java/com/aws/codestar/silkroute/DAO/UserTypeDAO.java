@@ -22,8 +22,8 @@ public List<UserType> getUserTypes() {
         ResultSet rs = ps.executeQuery();
         while(rs.next()) {
            UserType userType = new UserType();
-           userType.setType_id(rs.getLong(1));
-           userType.setType_name(rs.getString(2));
+           userType.setTypeId(rs.getLong(1));
+           userType.setTypeName(rs.getString(2));
           user_types.add(userType);
         }
     } catch (SQLException e) {

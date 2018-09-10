@@ -6,38 +6,50 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.*;
 
 @Entity
+@Table(name="tsr_department")
 public class Department{
 
 	@Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-     @SequenceGenerator(name = "department_id_gen", sequenceName = "department_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long department_id;
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	 @GeneratedValue(strategy=GenerationType.AUTO)
+//     @SequenceGenerator(name = "department_id_gen", sequenceName = "department_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long departmentId;
 	 
-	 @Column(name="department_name")
-    private String department_name;
+	
+
+	@Column(name="department_name", nullable=false)
+    private String departmentName;
 	 
-	 @Column(name="description")
+	 @Column(name="description", nullable=false)
     private String description; 
     
-
-	public long getDepartment_id()
+	 protected Department() {
+		 
+	 }
+	 public Department(long departmentId, String departmentName, String description) {
+			super();
+			this.departmentId = departmentId;
+			this.departmentName = departmentName;
+			this.description = description;
+		}
+	public long getDepartmentId()
 	{
-		return this.department_id;
+		return this.departmentId;
 	}
 
-	public void setDepartment_id(long department_id)
+	public void setDepartmentId(long departmentId)
 	{
-		this.department_id = department_id;
+		this.departmentId = departmentId;
 	}
 
-	public String getDepartment_name()
+	public String getDepartmentName()
 	{
-		return this.department_name;
+		return this.departmentName;
 	}
 
-	public void setDepartment_name(String department_name)
+	public void setDepartmentName(String departmentName)
 	{
-		this.department_name = department_name;
+		this.departmentName = departmentName;
 	}
 
 	public String getDescription()

@@ -23,9 +23,9 @@ public class OrderDAO extends AbstractDAO implements OrderDAOI {
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
             Order row = new Order( rs.getLong(2), rs.getDate(3));
-            row.setOrder_id(rs.getLong(1));
-            row.setShipping_date(rs.getDate(4));
-            row.setOrder_price(rs.getDouble(5));
+            row.setOrderId(rs.getLong(1));
+            row.setShippingDate(rs.getDate(4));
+            row.setOrderPrice(rs.getDouble(5));
             orders.add(row);
         }
 
@@ -47,9 +47,9 @@ public class OrderDAO extends AbstractDAO implements OrderDAOI {
          ResultSet rs = ps.executeQuery();
          while(rs.next()){
              order = new Order( rs.getLong(2), rs.getDate(3));
-             order.setOrder_id(rs.getLong(1));
-             order.setShipping_date(rs.getDate(4));
-             order.setOrder_price(rs.getDouble(5));
+             order.setOrderId(rs.getLong(1));
+             order.setShippingDate(rs.getDate(4));
+             order.setOrderPrice(rs.getDouble(5));
          }
  
      }
@@ -70,9 +70,9 @@ public class OrderDAO extends AbstractDAO implements OrderDAOI {
          ResultSet rs = ps.executeQuery();
          while(rs.next()){
              Order row = new Order( rs.getLong(2), rs.getDate(3));
-             row.setOrder_id(rs.getLong(1));
-             row.setShipping_date(rs.getDate(4));
-             row.setOrder_price(rs.getDouble(5));
+             row.setOrderId(rs.getLong(1));
+             row.setShippingDate(rs.getDate(4));
+             row.setOrderPrice(rs.getDouble(5));
              orders.add(row);
          }
  

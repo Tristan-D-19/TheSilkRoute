@@ -12,59 +12,75 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name="tsr_billing_info")
 public class BillingInfo{ 
 
 	@Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-   @SequenceGenerator(name = "billing_id_gen", sequenceName = "billing_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long billing_id;
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	 @GeneratedValue(strategy=GenerationType.AUTO)
+//   @SequenceGenerator(name = "billing_id_gen", sequenceName = "billing_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long billingId;
+	
+	public BillingInfo(String billingAddress, String billingState, long stripeId, Date billingDate,
+			int billingZip) {
+		super();
+		this.billingAddress = billingAddress;
+		this.billingState = billingState;
+		this.stripeId = stripeId;
+		this.billingDate = billingDate;
+		this.billingZip = billingZip;
+	}
+
+	protected BillingInfo() {
+		
+	}
 	
 	@ManyToOne
     private Account account;
 	
 	@Column(name="billing_address")
-    private String billing_address;
+    private String billingAddress;
 	
 	@Column(name="billing_state")
-    private String billing_state; 
+    private String billingState; 
 	
 	@Column(name="stripe_id")
-	private long stripe_id;
+	private long stripeId;
 	@Column(name="billing_date")
-	private Date billing_date;
+	private Date billingDate;
 	
 	@Column(name="billing_zip")
-	private int billing_zip;
+	private int billingZip;
 
 
-	public int getBilling_zip()
+	public int getBillingZip()
 	{
-		return this.billing_zip;
+		return this.billingZip;
 	}
 
-	public void setBilling_zip(int billing_zip)
+	public void setBillingZip(int billingZip)
 	{
-		this.billing_zip = billing_zip;
+		this.billingZip = billingZip;
 	}
 
-	public Date getBilling_date()
+	public Date getBillingDate()
 	{
-		return this.billing_date;
+		return this.billingDate;
 	}
 
-	public void setBilling_date(Date billing_date)
+	public void setBillingDate(Date billingDate)
 	{
-		this.billing_date = billing_date;
+		this.billingDate = billingDate;
 	}
 
-	public long getBilling_id()
+	public long getBillingId()
 	{
-		return this.billing_id;
+		return this.billingId;
 	}
 
-	public void setBilling_id(long billing_id)
+	public void setBillingId(long billingId)
 	{
-		this.billing_id = billing_id;
+		this.billingId = billingId;
 	}
 
 	public Account getAccount()
@@ -77,34 +93,34 @@ public class BillingInfo{
 		this.account = account;
 	}
 
-	public String getBilling_address()
+	public String getBillingAddress()
 	{
-		return this.billing_address;
+		return this.billingAddress;
 	}
 
-	public void setBilling_address(String billing_address)
+	public void setBillingAddress(String billingAddress)
 	{
-		this.billing_address = billing_address;
+		this.billingAddress = billingAddress;
 	}
 
-	public String getBilling_state()
+	public String getBillingState()
 	{
-		return this.billing_state;
+		return this.billingState;
 	}
 
-	public void setBilling_state(String billing_state )
+	public void setBillingState(String billingState )
 	{
-		this.billing_state = billing_state ;
+		this.billingState = billingState ;
 	}
 
-	public long getStripe_id()
+	public long getStripeId()
 	{
-		return this.stripe_id;
+		return this.stripeId;
 	}
 
-	public void setStripe_id(long stripe_id)
+	public void setStripeId(long stripeId)
 	{
-		this.stripe_id = stripe_id;
+		this.stripeId = stripeId;
 	}
  
 }

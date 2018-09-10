@@ -9,31 +9,36 @@ import javax.persistence.*;
  *
  */
 @Entity
+@Table(name="tsr_account")
 public class Account {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@SequenceGenerator(name = "account_id_gen", sequenceName = "account_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long account_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy=GenerationType.AUTO)
+//	@SequenceGenerator(name = "account_id_gen", sequenceName = "account_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long accountId;
 	
 	@OneToOne
     private User user;
 	
 	
 
-	@Column(name="balance")
+	@Column(name="balance", nullable=false)
     private double balance; 
 
 
     public Account(long accountId, User user){ 
-        account_id = accountId;
+        this.accountId = accountId;
         this.user = user;
     }
  
+    protected Account() {
+    	
+    }
     
-	public long getAccount_id()
+	public long getAccountId()
 	{
-		return this.account_id;
+		return this.accountId;
 	}
 	
 	public User getUser() {
@@ -44,9 +49,9 @@ public class Account {
 		this.user = user;
 	}
 
-	public void setAccount_id(long accountId)
+	public void setAccountId(long accountId)
 	{
-		this.account_id = accountId;
+		this.accountId = accountId;
 	}
 
 	

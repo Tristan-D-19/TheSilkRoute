@@ -1,31 +1,36 @@
 package com.aws.codestar.silkroute.models;
-import java.sql.Date;
+//import java.sql.Date;
+import java.util.Date;
  import javax.persistence.Entity;
  import javax.persistence.GeneratedValue;
  import javax.persistence.GenerationType;
  import javax.persistence.Id;
+import javax.annotation.Nullable;
 import javax.persistence.*;
 
 /**
  * This class is a representation of the user for TSR. This class contains all data relating to all users.  
  */
  @Entity
+ @Table(name="tsr_user")
 public class User {
 
      @Id
-     @GeneratedValue(strategy=GenerationType.AUTO)
-     @SequenceGenerator(name = "user_id_gen", sequenceName = "user_id_gen", initialValue = 50000000, allocationSize = 100)
-    private Long id;
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+//     @GeneratedValue(strategy=GenerationType.AUTO)
+//     @SequenceGenerator(name = "user_id_gen", sequenceName = "user_id_gen", initialValue = 50000000, allocationSize = 100)
+    private Long userId;
      
-     @Column(name="first_name")
-    private String first_name;
+     @Column(name="first_name", nullable=false)
+    private String firstName;
      
-     @Column(name="last_name")
-    private String last_name;
+     @Column(name="last_name", nullable=false)
+    private String lastName;
      
-     @Column(name="email")
+     @Column(name="email", nullable=false)
     private String email;
-     @Column(name="password")
+     
+     @Column(name="password", nullable=false)
     private String password;
      @Column(name="address")
     private String address;
@@ -39,57 +44,62 @@ public class User {
     private int phone;
      
      @OneToOne
-	private UserType user_type;
-     @Column(name="date_joined")
-	private Date date_joined;
+	private UserType userType;
      
-     @Column(name="is_active")
-	private boolean is_active;
+     @Column(name="date_joined", nullable=false)
+	private Date dateJoined;
+     
+     @Column(name="is_active", nullable=false)
+	private boolean active;
      
      @OneToOne 
-     private Picture profile_pic;
+     private Picture profilePic;
      
 
+     
     //Constructor 
 
+     protected User() {
+    	 
+     }
 	//-----------------------------------------------------------------------------------------------
-      public User() {}
+     
 
       public User(String email, String firstName, String lastName, String password ) {
-          this.first_name = firstName;
-          this.last_name = lastName;
+          this.firstName = firstName;
+          this.lastName = lastName;
           this.password = password;
           this.email = email;
       }
   
-	public Long getId()
+	public Long getUserId()
 	{
-		return this.id;
+		return this.userId;
 	}
 
-	public void setId(Long id)
+	public void setUserId(Long id)
 	{
-		this.id = id;
+		this.userId = id;
 	}
 
-	public String getFirst_name()
+	public String getFirstName()
 	{
-		return this.first_name;
+		return this.firstName;
 	}
 
-	public void setFirstname(String firstName)
+	public void setFirstName(String firstName)
 	{
-		this.first_name = firstName;
+		this.firstName = firstName;
 	}
 
-	public String getLastname()
+	public String getLastName()
 	{
-		return this.last_name;
+		return this.lastName;
 	}
 
-	public void setLastname(String lastName)
+	public void setLastName(String lastName)
 	{
-		this.last_name = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getEmail()
@@ -162,60 +172,60 @@ public class User {
 		this.phone = phone;
 	}
 
-	public UserType getUser_type()
+	public UserType getUserType()
 	{
-		return this.user_type;
+		return this.userType;
 	}
 
-	public void setUser_type(UserType userType)
+	public void setUserType(UserType userType)
 	{
-		this.user_type = userType;
+		this.userType = userType;
 	}
 
-	public Date getDate_joined(){
-		return date_joined;
+	public Date getDateJoined(){
+		return dateJoined;
 	}
-	public void setDate_joined(Date dateJoined) {
-		this.date_joined = dateJoined;
-	}
-
-	public boolean getIs_active() {
-		return is_active;
+	public void setDateJoined(Date dateJoined) {
+		this.dateJoined = dateJoined;
 	}
 
-	public void setIs_active(boolean is_active) {
-		this.is_active = is_active;
+	public boolean getActive() {
+		return active;
+	}
+
+	public void setActive(boolean is_active) {
+		this.active = is_active;
 	}
 	
 	public Picture getProfilePic() {
-		return profile_pic;
+		return profilePic;
 	}
 	public void setProfilePic(Picture pic) {
-		this.profile_pic = pic;
+		this.profilePic = pic;
 	}
     @Override
     public String toString() {
         return String.format(
                 "User[id=%d, firstName='%s', lastName='%s']",
-                id, first_name, last_name);
+                userId, firstName, lastName);
     }
     
     @Override
     public boolean equals(Object obj) {
     	if (obj instanceof User) {
     		User other = (User) obj;
-    		boolean same_id = (this.id == other.getId());
-    	    boolean same_f_name = (this.first_name == other.getFirst_name());
-    	    boolean same_l_name = (this.last_name == other.getLastname());
+    		boolean same_id = (this.userId == other.getUserId());
+    	    boolean same_f_name = (this.firstName == other.getFirstName());
+    	    boolean same_l_name = (this.lastName == other.getLastName());
     	    boolean same_email = (this.email == other.getEmail());
     	    boolean same_pass = (this.password == other.getPassword());
     	    boolean same_address = (this.address == other.getAddress());
     	    boolean same_city = (this.city == other.getCity());
     	    boolean same_zip = (this.zipcode == other.getZipcode());
     	    boolean same_phone = (this.phone == other.getPhone());
-    	    boolean same_u_type = (this.user_type == other.getUser_type());
-    	    boolean same_date_joined = (this.date_joined == other.getDate_joined());
-    	    boolean same_pic = (this.profile_pic == other.getProfilePic());
+    	    boolean same_u_type = (this.userType == other.getUserType());
+    	    boolean same_date_joined = (this.dateJoined == other.getDateJoined());
+    	    boolean same_pic = (this.profilePic == other.getProfilePic());
     	    	
     	    if(same_address && same_city && same_date_joined && same_email && 
     	    		same_f_name && same_l_name && same_id && same_pass && same_phone &&

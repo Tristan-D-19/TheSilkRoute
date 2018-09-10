@@ -8,15 +8,17 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name="tsr_product")
 public class Product{ 
 
 	@Id
-	 @GeneratedValue(strategy=GenerationType.AUTO)
-     @SequenceGenerator(name = "product_id_gen", sequenceName = "product_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long product_id; 
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	 @GeneratedValue(strategy=GenerationType.AUTO)
+//     @SequenceGenerator(name = "product_id_gen", sequenceName = "product_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long productId; 
 	 
-	 @Column(name="product_name")
-    private String product_name; 
+	 @Column(name="product_name", nullable=false)
+    private String productName; 
 	 
 	 @ManyToOne
     private User seller;
@@ -25,23 +27,27 @@ public class Product{
 	private List<Department> departments = new ArrayList<Department>();
 	
 
-	@Column(name="quantity")
+	@Column(name="quantity", nullable=false)
     private int quantity;
 	
-	@Column(name="price")
+	@Column(name="price", nullable=false)
     private double price;
     
-    @Column(name="product_description")
-    private String product_description;
+    @Column(name="product_description", nullable=false)
+    private String productDescription;
 
-	public long getProduct_id()
+    protected Product() {
+    	
+    }
+    
+	public long getProductId()
 	{
-		return this.product_id;
+		return this.productId;
 	}
 
-	public void setProduct_id( long productId )
+	public void setProductId( long productId )
 	{
-		this.product_id = productId ;
+		this.productId = productId ;
 	}
 
 	public List<Department> getDepartments() {
@@ -51,14 +57,14 @@ public class Product{
 	public void setDepartments(List<Department> departments) {
 		this.departments = departments;
 	}
-	public String getProduct_name()
+	public String getProductName()
 	{
-		return this.product_name;
+		return this.productName;
 	}
 
-	public void setProduct_name(String productName )
+	public void setProductName(String productName )
 	{
-		this.product_name = productName ;
+		this.productName = productName ;
 	}
 	  public User getSeller() {
 			return seller;
@@ -89,14 +95,14 @@ public class Product{
 		this.price = price;
 	}
 
-	public String getProduct_description()
+	public String getProductDescription()
 	{
-		return this.product_description;
+		return this.productDescription;
 	}
 
-	public void setProduct_description(String productDescription)
+	public void setProductDescription(String productDescription)
 	{
-		this.product_description = productDescription;
+		this.productDescription = productDescription;
 	}
 
 }
