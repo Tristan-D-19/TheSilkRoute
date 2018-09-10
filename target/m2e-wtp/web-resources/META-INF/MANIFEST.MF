@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
-Implementation-Title: Silk Route
+Implementation-Title: Sample Java Spring web service Using AWS CodeSta
+ r
 Implementation-Version: 1.0
 Built-By: Tristan
 Implementation-Vendor-Id: com.aws.codestar.projecttemplates

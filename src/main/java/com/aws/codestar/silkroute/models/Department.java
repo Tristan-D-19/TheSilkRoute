@@ -1,9 +1,22 @@
 package com.aws.codestar.silkroute.models;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+
+@Entity
 public class Department{
 
+	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+     @SequenceGenerator(name = "department_id_gen", sequenceName = "department_id_gen", initialValue = 50000000, allocationSize = 100)
     private long department_id;
+	 
+	 @Column(name="department_name")
     private String department_name;
+	 
+	 @Column(name="description")
     private String description; 
     
 

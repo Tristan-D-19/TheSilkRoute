@@ -1,28 +1,30 @@
 package com.aws.codestar.silkroute.models;
+import javax.persistence.*;
 
+@Entity
 public class ProductPicture{
 
-    long product_id;
-    long pic_id;
-
-	public long getProduct_id()
-	{
-		return this.product_id;
+	@OneToOne 
+    private Product product;
+	
+	@OneToOne
+    private Picture picture;
+    
+    
+    
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public Picture getPicture() {
+		return picture;
+	}
+	public void setPicture(Picture picture) {
+		this.picture = picture;
 	}
 
-	public void setProduct_id(long product_id)
-	{
-		this.product_id = product_id;
-	}
-
-	public long getPic_id()
-	{
-		return this.pic_id;
-	}
-
-	public void setPic_id(long pic_id)
-	{
-		this.pic_id = pic_id;
-	}
+	
 
 }

@@ -1,10 +1,24 @@
 package com.aws.codestar.silkroute.models;
 
+import javax.persistence.ColumnResult;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+
+@Entity
 public class UserType{
 
+	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+    @SequenceGenerator(name = "user_type_id_gen", sequenceName = "user_type_id_gen", initialValue = 50000000, allocationSize = 100)
     private long type_id;
+	
+	@Column(name="type_name")
     private String type_name;
 
+	
 	public long getType_id()
 	{
 		return this.type_id;

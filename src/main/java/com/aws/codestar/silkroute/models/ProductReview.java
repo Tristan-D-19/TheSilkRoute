@@ -1,32 +1,62 @@
 package com.aws.codestar.silkroute.models;
 import java.sql.Date;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
+
+@Entity
 public class ProductReview{
 
+	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+     @SequenceGenerator(name = "review_id_gen", sequenceName = "review_id_gen", initialValue = 50000000, allocationSize = 100)
     private long review_id;
-	private long user_id;
-	private long product_id;
+	 
+	 @OneToOne
+	private User user;
+	
+	 @OneToOne
+	private Product product;
+	 
+	 @Column(name="review_body")
     private String review_body;
+	 @Column(name="rating")
 	private int rating;
+	 
+	 @Column(name="creation_date")
 	private Date creation_date;
 
-	
 
 
-
-    public ProductReview(long user_id, long product_id, String review_body, int rating, Date creation_date){
-        this.user_id = user_id;
+    public ProductReview(User user, Product product, String review_body, int rating, Date creation_date){
+        this.user = user;
         this.review_body = review_body;
 		this.rating = rating;
-		this.product_id = product_id;
+		this.product = product;
 		this.creation_date = creation_date;
 
 	}
-	public long getProductId(){
-		return this.product_id;
+	public User getUser() {
+		return user;
 	}
-	public void setProductId(long product_id){
-		this.product_id = product_id;
+	public void setUser(User user) {
+		this.user = user;
 	}
+	public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	public String getReview_body() {
+		return review_body;
+	}
+	public void setReview_body(String review_body) {
+		this.review_body = review_body;
+	}
+	
 	public long getReview_id()
 	{
 		return this.review_id;
@@ -45,16 +75,6 @@ public class ProductReview{
 	public void setReview_id(long review_id)
 	{
 		this.review_id = review_id;
-	}
-
-	public long getUser_id()
-	{
-		return this.user_id;
-	}
-
-	public void setUser_id(long user_id)
-	{
-		this.user_id = user_id;
 	}
 
 	public String getReviewbody()

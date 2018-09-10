@@ -1,16 +1,37 @@
 package com.aws.codestar.silkroute.models;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
 /**
  * This class represents a product or service provided by users in the TSR application.
  */
+
+@Entity
 public class Product{ 
 
-
+	@Id
+	 @GeneratedValue(strategy=GenerationType.AUTO)
+     @SequenceGenerator(name = "product_id_gen", sequenceName = "product_id_gen", initialValue = 50000000, allocationSize = 100)
     private long product_id; 
+	 
+	 @Column(name="product_name")
     private String product_name; 
-    private long seller_id; 
-    private long department_id;
+	 
+	 @ManyToOne
+    private User seller;
+	 
+	@ManyToMany
+	private List<Department> departments = new ArrayList<Department>();
+	
+
+	@Column(name="quantity")
     private int quantity;
+	
+	@Column(name="price")
     private double price;
+    
+    @Column(name="product_description")
     private String product_description;
 
 	public long getProduct_id()
@@ -23,6 +44,13 @@ public class Product{
 		this.product_id = productId ;
 	}
 
+	public List<Department> getDepartments() {
+		return departments;
+	}
+
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
+	}
 	public String getProduct_name()
 	{
 		return this.product_name;
@@ -32,26 +60,14 @@ public class Product{
 	{
 		this.product_name = productName ;
 	}
+	  public User getSeller() {
+			return seller;
+		}
+	
+		public void setSeller(User seller) {
+			this.seller = seller;
+		}
 
-	public long getSellerId()
-	{
-		return this.seller_id;
-	}
-
-	public void setSeller_id(long sellerId )
-	{
-		this.seller_id = sellerId ;
-	}
-
-	public long getDepartment_id()
-	{
-		return this.department_id;
-	}
-
-	public void setDepartment_id(long departmentId)
-	{
-		this.department_id = departmentId;
-	}
 
 	public int getQuantity()
 	{

@@ -1,33 +1,54 @@
 package com.aws.codestar.silkroute.models;
 import java.sql.Date;
-// import javax.persistence.Entity;
-// import javax.persistence.GeneratedValue;
-// import javax.persistence.GenerationType;
-// import javax.persistence.Id;
-
+ import javax.persistence.Entity;
+ import javax.persistence.GeneratedValue;
+ import javax.persistence.GenerationType;
+ import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * This class is a representation of the user for TSR. This class contains all data relating to all users.  
  */
-// @Entity
+ @Entity
 public class User {
 
-    // @Id
-    // @GeneratedValue(strategy=GenerationType.AUTO)
+     @Id
+     @GeneratedValue(strategy=GenerationType.AUTO)
+     @SequenceGenerator(name = "user_id_gen", sequenceName = "user_id_gen", initialValue = 50000000, allocationSize = 100)
     private Long id;
+     
+     @Column(name="first_name")
     private String first_name;
+     
+     @Column(name="last_name")
     private String last_name;
+     
+     @Column(name="email")
     private String email;
+     @Column(name="password")
     private String password;
+     @Column(name="address")
     private String address;
-    private String city; 
+     @Column(name="city")
+    private String city;
+     @Column(name="zipcode")
     private int zipcode; 
+     @Column(name="state")
     private String state; 
+     @Column(name="phone")
     private int phone;
-	private int user_type;
+     
+     @OneToOne
+	private UserType user_type;
+     @Column(name="date_joined")
 	private Date date_joined;
+     
+     @Column(name="is_active")
 	private boolean is_active;
-	private long profile_pic;
+     
+     @OneToOne 
+     private Picture profile_pic;
+     
 
     //Constructor 
 
@@ -141,12 +162,12 @@ public class User {
 		this.phone = phone;
 	}
 
-	public int getUser_type()
+	public UserType getUser_type()
 	{
 		return this.user_type;
 	}
 
-	public void setUser_type(int userType)
+	public void setUser_type(UserType userType)
 	{
 		this.user_type = userType;
 	}
@@ -166,10 +187,10 @@ public class User {
 		this.is_active = is_active;
 	}
 	
-	public long getProfilePic() {
+	public Picture getProfilePic() {
 		return profile_pic;
 	}
-	public void setProfilePic(long pic) {
+	public void setProfilePic(Picture pic) {
 		this.profile_pic = pic;
 	}
     @Override

@@ -8,6 +8,16 @@
 <title>TSR</title>
 </head>
 <body>
-Hello kjj
+Hello 
+<%
+	User user =  (User) session.getAttribute("User");
+	Boolean loggedIn = (Boolean) session.getAttribute("loggedIn");
+	if(user == null || loggedIn == null || loggedIn.equals(false) ){
+		response.sendRedirect("Login.jsp");
+	}
+	else{
+		response.sendRedirect("Market.jsp");
+	}
+%>
 </body>
 </html>

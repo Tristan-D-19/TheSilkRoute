@@ -15,6 +15,8 @@ public class BillingInfo{
 	@Id 
 	@Column
     private long billing_id;
+	
+	
     private long acc_id;
     private String billing_address;
     private String billing_state; 
