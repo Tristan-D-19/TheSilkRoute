@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.aws.codestar.silkroute.DAO.UserDAOTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.002 sec <<< FAILURE! - in com.aws.codestar.silkroute.DAO.UserDAOTest
-testCreateUser()  Time elapsed: 0.002 sec  <<< ERROR!
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.012 sec <<< FAILURE! - in com.aws.codestar.silkroute.DAO.UserDAOTest
+testCreateUser()  Time elapsed: 0.01 sec  <<< ERROR!
 java.lang.NullPointerException
-	at com.aws.codestar.silkroute.DAO.UserDAOTest.testCreateUser(UserDAOTest.java:47)
+	at com.aws.codestar.silkroute.DAO.UserDAOTest.testCreateUser(UserDAOTest.java:96)
 

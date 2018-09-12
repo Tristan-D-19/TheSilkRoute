@@ -1,6 +1,8 @@
 package com.aws.codestar.silkroute.models;
-//import java.sql.Date;
-import java.util.Date;
+import java.sql.Date;
+import java.util.Calendar;
+
+//import java.util.Date;
  import javax.persistence.Entity;
  import javax.persistence.GeneratedValue;
  import javax.persistence.GenerationType;
@@ -32,6 +34,7 @@ public class User {
      
      @Column(name="password", nullable=false)
     private String password;
+     
      @Column(name="address")
     private String address;
      @Column(name="city")
@@ -70,6 +73,8 @@ public class User {
           this.lastName = lastName;
           this.password = password;
           this.email = email;
+          this.dateJoined = new Date(Calendar.getInstance().getTime().getTime());
+          this.active = true;
       }
   
 	public Long getUserId()
@@ -183,6 +188,7 @@ public class User {
 	}
 
 	public Date getDateJoined(){
+		
 		return dateJoined;
 	}
 	public void setDateJoined(Date dateJoined) {

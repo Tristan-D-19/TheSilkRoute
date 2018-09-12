@@ -5,10 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aws.codestar.silkroute.models.User;
 
 @Repository
+@Transactional
 public interface UserRepository  extends JpaRepository <User, Long> {
 	 
 		/**
@@ -17,7 +19,7 @@ public interface UserRepository  extends JpaRepository <User, Long> {
 		 * @return a user from the database
 		 */
 //		@Query("select u from tsr_admin.tsr_user u where LOWER(u.EMAIL) = LOWER(:email)")
-//		  User findUserByEmail(@Param("email") String email);
+		 public User findByEmail(String email);
 		  
 		
 		/**

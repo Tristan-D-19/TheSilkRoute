@@ -7,8 +7,8 @@ public class DAO_Tester {
 	UserDAOTest userDAOT1 = new UserDAOTest();
 	
 	
-	userDAOT1.testGetUserByEmail();
-	
+//	userDAOT1.testGetUserByEmail();
+//	
 	
 	}
 
