@@ -8,6 +8,5 @@ com\aws\codestar\silkroute\DAO\AccountDAOTest.class
 com\aws\codestar\silkroute\DAO\BIllingInfoDAOTest.class
 com\aws\codestar\silkroute\DAO\OrderDetailDAOTest.class
 com\aws\codestar\silkroute\DAO\PictureDAOTest.class
-com\aws\codestar\silkroute\controller\DAO_Tester.class
 com\aws\codestar\silkroute\DAO\UserDAOTest.class
 com\aws\codestar\silkroute\DAO\DBConnectionTest.class

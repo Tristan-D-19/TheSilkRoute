@@ -24,8 +24,8 @@ public class UserController {
 	@Autowired
     private UserService userService;
 
-    @Autowired
-    private SecurityService securityService;
+//    @Autowired
+//    private SecurityService securityService;
     
     @Autowired
     private UserValidator userValidator;
@@ -77,6 +77,7 @@ public class UserController {
     @GetMapping("/login")
     public ModelAndView login(String error, String logout) {
     	 ModelAndView mav = new ModelAndView("login");
+    	 mav.addObject("user", new User());
         if (error != null)
             mav.addObject("error", "Your username and password is invalid.");
 

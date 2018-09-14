@@ -157,6 +157,18 @@
 		    <artifactId>jquery</artifactId>
 		    <version>3.2.1</version>
 		</dependency>
+			<dependency>
+	      <groupId>com.google.apis</groupId>
+	      <artifactId>google-api-services-webfonts</artifactId>
+	      <version>v1-rev59-1.25.0</version>
+	    </dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
+<dependency>
+    <groupId>org.webjars</groupId>
+    <artifactId>font-awesome</artifactId>
+    <version>4.7.0</version>
+</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
 		
 	

@@ -38,9 +38,6 @@ import com.aws.codestar.silkroute.service.*;
 @DataJpaTest
 public class UserDAOTest {
 	
-
-	
-	
 	
 	@Autowired
 	private TestEntityManager entityManager;

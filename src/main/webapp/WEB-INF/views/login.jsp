@@ -3,13 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+	<link href="webjars/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="webjars/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="webjars/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="css/auth.css" rel="stylesheet">
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+<link rel="stylesheet" type="text/css" href=webjars/font-awesome/4.7.0/css/font-awesome.min.css" />
 		<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 <title>Login/Register</title>
 </head>
@@ -30,24 +31,22 @@
                     <a class="hiddenanchor" id="toregister2"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                            <form  action="/login" autocomplete="on" method="post" modelAttribute="user"> 
                                 <h1>Log in</h1> 
                                 <p> 
-                                    <label for="username" class="uname" > Your email </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
+                                    <label for="email" class="email" > Your First Name </label>
+                                    <input id="email" path="email" required="required" type="text" placeholder="mymail@mail.com"/>
                                 </p>
                                 <p> 
                                     <label for="password" class="youpasswd"> Your password </label>
-                                    <input id="password" name="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+                                    <input id="password" path="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
                                 </p>
                                 <p class="keeplogin"> 
 									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
 									<label for="loginkeeping">Keep me logged in</label>
 								</p>
                                 <p class="login button"> 
-                  
-									<input type="submit" value="Login"/> 
-								
+									<input id=login-submit type="submit" value="Login"/> 
 								</p>
                                 <p class="change_link">
 									Not a member yet ?
@@ -55,13 +54,15 @@
 								</p>
                             </form>
                         </div>
-
+<!-- ---------------------------------------------------------------------------------------------->                      
+                        <div id="register-forms" class="animate form">
+                		 <form:form  action="/register" autocomplete="on" modelAttribute="user" > 
                         <div id="register1" class="animate form">
-                            <form  action="mysuperscript.php" autocomplete="on"> 
+                           
                                 <h1> Sign up </h1> 
                                 <p> 
-                                    <label for="usernamesignup" class="uname" >Your username</label>
-                                    <input id="usernamesignup" name="usernamesignup" required="required" type="text" placeholder="mysuperusername690" />
+                                    <label for="firstName" class="uname" >Your First Name</label>
+                                    <input id="usernamesignup" path="firstName" required="required" type="text" placeholder="mysuperusername690" />
                                 </p>
                                 <p> 
                                     <label for="emailsignup" class="youmail"  > Your email</label>
@@ -83,11 +84,11 @@
 									Already a member ?
 									<a href="#tologin" class="to_register1"> Go and log in </a>
 								</p>
-                            </form>
+                           
                         </div>
-						
+<!-- ---------------------------------------------------------------------------------------------->                      						
 						<div id="register2" class="animate form">
-                            <form  action="/auth" autocomplete="on"> 
+                           
                                 <h1> Sign up </h1> 
                                 <p> 
                                     <label for="usernamesignup" class="uname" >Your First Name</label>
@@ -112,8 +113,11 @@
 									Already a member ?
 									<a href="#tologin" class="to_register1"> Go and log in </a>
 								</p>
-                            </form>
+								</div>
+                            </form:form>
                         </div>
+<!-- ---------------------------------------------------------------------------------------------->                      
+                       
                     </div>
                 </div>  
             </section>

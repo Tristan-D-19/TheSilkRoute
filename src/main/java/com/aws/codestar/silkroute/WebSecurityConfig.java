@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer.UserDetailsBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,9 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
 	private DataSource dataSource;
 
-//	 @Autowired
-//	 private BCryptPasswordEncoder bCryptPasswordEncoder;
-	 
+  
 	    @Bean
 	    public BCryptPasswordEncoder bCryptPasswordEncoder() {
 	        return new BCryptPasswordEncoder();
@@ -61,17 +60,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	                	.and().logout()
 	                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 	                .logoutSuccessUrl("/").and().exceptionHandling()
-	                .accessDeniedPage("/access-denied");
+	                .accessDeniedPage("/access-denied")
+	                ;
 	    }
 
 	    @Autowired
 	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	    	    auth.
+//	    	 UserDetailsBuilder <User> users = User.withDefaultPasswordEncoder();
+	    	
+	    	auth.		
 	                    jdbcAuthentication()
 	                    .usersByUsernameQuery(usersQuery)
 	                    .authoritiesByUsernameQuery(rolesQuery)
 	                    .dataSource(dataSource)
-	                    .passwordEncoder(bCryptPasswordEncoder());
+	                    .passwordEncoder(bCryptPasswordEncoder())
+	                    .and();
+	    	    
+	    	    auth.jdbcAuthentication().withUser("tsr_admin").password("$lowJaguar29").roles("USER","ADMIN");
 	        }
 
 	    @Override

@@ -14,6 +14,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer.UserDetailsBuilder;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
@@ -274,6 +275,12 @@ public class User implements Serializable {
 		
 		return this.firstName +" " + this.lastName;
 		
+	}
+
+
+	public static UserDetailsBuilder withDefaultPasswordEncoder() {
+		
+		return null;
 	}
 
 }

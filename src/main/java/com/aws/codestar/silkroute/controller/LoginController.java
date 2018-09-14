@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aws.codestar.silkroute.DAO.*;
 
 @Controller
-@RequestMapping(value="/login", method= RequestMethod.POST )
+@RequestMapping(value="/loginss", method= RequestMethod.POST )
 public class LoginController {
 
 	

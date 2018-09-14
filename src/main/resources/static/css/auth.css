@@ -176,7 +176,7 @@ a.hiddenanchor{
 }
 /** The wrapper that will contain our two forms **/
 #wrapper{
-	width: 60%;
+	width: 60%; 
 	right: 0px;
 	min-height: 560px;	
 	margin: 0px auto;	
@@ -432,7 +432,7 @@ p.change_link{
 	top: 1px;
 }
 /** Styling all forms **/
-#register1, #register2
+#register1, #register2, #register-forms
 #login{
 	position: absolute;
 	top: 0px;
@@ -451,15 +451,21 @@ p.change_link{
 #register1{	
 	z-index: 21;
 	opacity: 0;
+	
 } #register2{	
 	z-index: 17;
-	opacity: 0;
+	opacity: -1;
 }
+#register-forms{
+	opacity: -1;
+	display:none;
+}
+
 #login{
 	z-index: 22;
 }
-#toregister1:target ~ #wrapper #register1,
-#toregister2:target ~ #wrapper #register2,
+#toregister1:target ~ #wrapper #register-forms #register1,
+#toregister2:target ~ #wrapper #register-forms #register2,
 #tologin:target ~ #wrapper #login{
 	-webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
 -moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
@@ -477,23 +483,25 @@ box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
 	animation-delay: .1s;
 }
 #toregister:target ~ #wrapper #login,
-#tologin:target ~ #wrapper #register1
-#toregister1:target~#wrapper #register2 {
+#tologin:target ~ #wrapper #register-forms #register1
+#toregister1:target~#wrapper #register-forms #register2 {
 	-webkit-animation-name: fadeOutLeft;
 	-moz-animation-name: fadeOutLeft;
 	-ms-animation-name: fadeOutLeft;
 	-o-animation-name: fadeOutLeft;
 	animation-name: fadeOutLeft;
+	
 }
 
 #toregister1:target ~ #wrapper #login,
-#tologin:target ~ #wrapper #register1,
-#toregister1:target~#wrapper #register2{
+#tologin:target ~ #wrapper #register-forms #register1,
+#toregister1:target~ #wrapper.#register-forms #register2{
  animation-name: fadeOutLeftBig;
 }
 
 @keyframes fadeOutLeft {
  0% {
+ 
   opacity: 1;
   transform: translateX(0);
  }
