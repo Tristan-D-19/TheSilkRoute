@@ -18,17 +18,19 @@ public class Account {
 //	@SequenceGenerator(name = "account_id_gen", sequenceName = "account_id_gen", initialValue = 50000000, allocationSize = 100)
     private long accountId;
 	
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
     private User user;
 	
 	
+	@OneToMany
+	private List<BillingInfo> billingInfos;
 
 	@Column(name="balance", nullable=false)
     private double balance; 
 
 
-    public Account(long accountId, User user){ 
-        this.accountId = accountId;
+    public Account(double balance, User user){ 
+        this.balance = balance;
         this.user = user;
     }
  
@@ -54,11 +56,25 @@ public class Account {
 		this.accountId = accountId;
 	}
 
-	
+	public void deposit (double amount) {
+		this.balance = this.balance + amount;
+	}
 
+	public void withdraw (double amount)
+	{
+		this.balance = this.balance - amount;
+	}
 	public double getBalance()
 	{
 		return this.balance;
+	}
+
+	public List<BillingInfo> getBillingInfos() {
+		return billingInfos;
+	}
+
+	public void setBillingInfos(List<BillingInfo> billingInfos) {
+		this.billingInfos = billingInfos;
 	}
 
 	public void setBalance(double balance )

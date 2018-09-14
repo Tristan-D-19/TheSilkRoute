@@ -1,5 +1,13 @@
+com\aws\codestar\silkroute\DAO\OrderDAOTest.class
+com\aws\codestar\silkroute\DAO\ProductReviewDAOTest.class
+com\aws\codestar\silkroute\DAO\ProductDAOTest.class
+com\aws\codestar\silkroute\DAO\ProductPictureDAOTest.class
+com\aws\codestar\silkroute\DAO\DepartmentDAOTest.class
+com\aws\codestar\silkroute\DAO\RoleDAOTest.class
+com\aws\codestar\silkroute\DAO\AccountDAOTest.class
+com\aws\codestar\silkroute\DAO\BIllingInfoDAOTest.class
+com\aws\codestar\silkroute\DAO\OrderDetailDAOTest.class
+com\aws\codestar\silkroute\DAO\PictureDAOTest.class
 com\aws\codestar\silkroute\controller\DAO_Tester.class
-com\aws\codestar\silkroute\DAO\TestUserRepo.class
 com\aws\codestar\silkroute\DAO\UserDAOTest.class
 com\aws\codestar\silkroute\DAO\DBConnectionTest.class
-com\aws\codestar\silkroute\DAO\UserDAOMock.class

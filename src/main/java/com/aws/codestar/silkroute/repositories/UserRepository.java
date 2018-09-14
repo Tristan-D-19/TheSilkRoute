@@ -1,5 +1,7 @@
 package com.aws.codestar.silkroute.repositories;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -9,12 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aws.codestar.silkroute.models.User;
 
-@Repository
-@Transactional
-public interface UserRepository  extends JpaRepository <User, Long> {
+
+public interface UserRepository  extends CrudRepository <User, Long> {
 	 
 		/**
-		 * getUserByEmail gets a user from the table TSR_USER by email
+		 * findByEmail gets a user from the table TSR_USER by email
 		 * @param email the user's Email
 		 * @return a user from the database
 		 */
@@ -27,8 +28,8 @@ public interface UserRepository  extends JpaRepository <User, Long> {
 		 * @param userId the user's Id
 		 * @return a boolean indicating the user is deactivated
 		 */
-//		  @Query("UPDATE TSR_USER u SET u.IS_ACTIVE =0 WHERE u.USER_ID=?")
-//		  boolean deActivateUser(long user_id);
+		  @Query("UPDATE User u SET u.active =0 WHERE u.userId= :user_id")
+		  boolean deActivateUser(long user_id);
 		  
 		  
 		  /**
@@ -36,8 +37,8 @@ public interface UserRepository  extends JpaRepository <User, Long> {
 			 * @param userId the user's Id
 			 * @return a boolean indicating the user is reactivated
 			 */
-//		  @Query("UPDATE TSR_ADMIN.TSR_USER u SET u.ACTIVE =1 WHERE u.USER_ID= :user_id ")
-//		  boolean reActivateUser(@Param("user_id") long user_id);
+		  @Query("UPDATE User u SET u.active =1 WHERE u.userId = :user_id ")
+		  boolean reActivateUser(@Param("user_id") long user_id);
 		  
 		  
 			/**
@@ -45,9 +46,23 @@ public interface UserRepository  extends JpaRepository <User, Long> {
 			 * @param encryptedPassword the new encrypted password
 			 * @param userId the user's Id 
 			 */
-//		  @Query("UPDATE TSR_ADMIN.TSR_USER SET ENCRYPTED_PASSWORD= :encryptedPassword WHERE u.USER_ID= :user_id")
-//		  boolean changeUserPassword(String encryptedPassword, long user_id);
+		  @Query("update User u SET u.password = :encryptedPassword WHERE u.userId= :user_id")
+		  boolean changeUserPassword(@Param("encryptedPassword") String encryptedPassword, @Param("user_id") long user_id);
 		  
+		  
+		
+		  /**
+			 * getAllUsers retrieves all active users from the database retrieves email, first name, zipcode and profile pic
+			 * this function will be used for searching user's while securing data
+			 * @return a list of all active user's from the database. type List
+			 */
+		  	@Query("SELECT u.email, u.firstName, u.zipcode, u.profilePic FROM User u where u.active =1")
+			public List<User> findAllUsers();
+		  	
+		  	@Query("SELECT u FROM User u where u.active =true")
+		    @Transactional(readOnly =true)
+		    public List<User> readAll();
+		  	
 		  
 		
 }

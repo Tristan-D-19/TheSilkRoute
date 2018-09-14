@@ -15,8 +15,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  *  @ComponentScan
  */
 @SpringBootApplication
-@EnableAutoConfiguration
-@EnableJpaRepositories
 public class Application extends SpringBootServletInitializer {
 
     @Override

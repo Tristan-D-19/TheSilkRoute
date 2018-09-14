@@ -7,15 +7,13 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="tsr_department")
+
 public class Department{
 
 	@Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-//	 @GeneratedValue(strategy=GenerationType.AUTO)
-//     @SequenceGenerator(name = "department_id_gen", sequenceName = "department_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long departmentId;
-	 
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long departmentId;
+	 	
 
 	@Column(name="department_name", nullable=false)
     private String departmentName;
@@ -26,9 +24,7 @@ public class Department{
 	 protected Department() {
 		 
 	 }
-	 public Department(long departmentId, String departmentName, String description) {
-			super();
-			this.departmentId = departmentId;
+	 public Department( String departmentName, String description) {
 			this.departmentName = departmentName;
 			this.description = description;
 		}

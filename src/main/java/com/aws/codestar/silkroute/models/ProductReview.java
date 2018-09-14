@@ -1,25 +1,22 @@
 package com.aws.codestar.silkroute.models;
 import java.sql.Date;
+import java.util.Calendar;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.*;
 
 @Entity
 @Table(name="tsr_product_review")
+
 public class ProductReview{
 
 	@Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-//	 @GeneratedValue(strategy=GenerationType.AUTO)
-//     @SequenceGenerator(name = "review_id_gen", sequenceName = "review_id_gen", initialValue = 50000000, allocationSize = 100)
-    private long reviewId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long reviewId;
 	 
-	 @OneToOne
+	 @OneToOne(cascade = {CascadeType.ALL})
 	private User user;
 	
-	 @OneToOne
+	 @OneToOne(cascade = {CascadeType.ALL})
 	private Product product;
 	 
 	 @Column(name="review_body", nullable=false)
@@ -36,13 +33,12 @@ public class ProductReview{
 		
 	}
 	
-    public ProductReview(User user, Product product, String review_body, int rating, Date creation_date){
+    public ProductReview(User user, Product product, String review_body, int rating){
         this.user = user;
         this.reviewBody = review_body;
 		this.rating = rating;
 		this.product = product;
-		this.creationDate = creation_date;
-
+		this.creationDate = new Date(Calendar.getInstance().getTime().getTime());
 	}
 	public User getUser() {
 		return user;

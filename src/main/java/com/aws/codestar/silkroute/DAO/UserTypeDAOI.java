@@ -27,5 +27,5 @@ public interface UserTypeDAOI {
      * getUserTypes gets all of the user types from the table TSR_USER_TYPE
      * @return a list of user types , type List
      */
-    public List<UserType> getUserTypes();
+    public List<Role> getUserTypes();
 }

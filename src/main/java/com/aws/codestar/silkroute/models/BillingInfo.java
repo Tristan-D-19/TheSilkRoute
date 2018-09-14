@@ -1,10 +1,7 @@
 package com.aws.codestar.silkroute.models;
 import java.sql.Date;
+import java.util.Calendar;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.*;
 /**
  * This class is a representation of billing information for a user's account. No credit card information is stored within. 
@@ -13,29 +10,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="tsr_billing_info")
+
 public class BillingInfo{ 
 
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-//	 @GeneratedValue(strategy=GenerationType.AUTO)
-//   @SequenceGenerator(name = "billing_id_gen", sequenceName = "billing_id_gen", initialValue = 50000000, allocationSize = 100)
     private long billingId;
 	
-	public BillingInfo(String billingAddress, String billingState, long stripeId, Date billingDate,
-			int billingZip) {
-		super();
-		this.billingAddress = billingAddress;
-		this.billingState = billingState;
-		this.stripeId = stripeId;
-		this.billingDate = billingDate;
-		this.billingZip = billingZip;
-	}
-
-	protected BillingInfo() {
-		
-	}
-	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.ALL})
     private Account account;
 	
 	@Column(name="billing_address")
@@ -53,6 +35,19 @@ public class BillingInfo{
 	private int billingZip;
 
 
+	public BillingInfo(String billingAddress, String billingState,
+			int billingZip) {
+		super();
+		this.billingAddress = billingAddress;
+		this.billingState = billingState;
+
+		this.billingDate = new Date(Calendar.getInstance().getTime().getTime());;
+		this.billingZip = billingZip;
+	}
+
+	protected BillingInfo() {
+		
+	}
 	public int getBillingZip()
 	{
 		return this.billingZip;
@@ -88,7 +83,7 @@ public class BillingInfo{
 		return this.account;
 	}
 
-	public void setAcc_id(Account account)
+	public void setAccount(Account account)
 	{
 		this.account = account;
 	}

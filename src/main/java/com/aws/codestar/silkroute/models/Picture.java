@@ -1,41 +1,46 @@
 package com.aws.codestar.silkroute.models;
 import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Blob;
+import java.util.Calendar;
+
 
 @Entity
 @Table(name="tsr_picture")
+
 public class Picture{
 
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-//	 @GeneratedValue(strategy=GenerationType.AUTO)
-//     @SequenceGenerator(name = "pic_id_gen", sequenceName = "pic_id_gen", initialValue = 50000000, allocationSize = 100)
     private long pictureId;
 	 
 	 
-	 @ManyToOne
+	 @ManyToOne(cascade = {CascadeType.ALL})
     private User user;
  
 	 @Column(name="creation_date", nullable=false)
 	private Date creationDate;
 	 
 	 @Column(name="image", nullable=false)
-	private Blob image;
+	private String imageUrl;
 
+	 protected Picture() {
+		 
+	 }
 	
-	public Picture() {
-		
+	public Picture(User user, String imageUrl) {
+		this.creationDate = new Date(Calendar.getInstance().getTime().getTime());
+		this.user = user;
+		this.imageUrl = imageUrl;
 	}
 	
-	public Blob getImage()
+	public String getImageUrl()
 	{
-		return this.image;
+		return this.imageUrl;
 	}
 
-	public void setImage(Blob image)
+	public void setImageUrl(String imageUrl)
 	{
-		this.image = image;
+		this.imageUrl = imageUrl;
 	}
 	public User getUser() {
 			return user;

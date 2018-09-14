@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="tsr_product")
+
 public class Product{ 
 
 	@Id
@@ -20,10 +21,10 @@ public class Product{
 	 @Column(name="product_name", nullable=false)
     private String productName; 
 	 
-	 @ManyToOne
+	 @ManyToOne(cascade = {CascadeType.ALL})
     private User seller;
 	 
-	@ManyToMany
+	@ManyToMany(cascade = {CascadeType.ALL})
 	private List<Department> departments = new ArrayList<Department>();
 	
 
@@ -36,10 +37,39 @@ public class Product{
     @Column(name="product_description", nullable=false)
     private String productDescription;
 
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<ProductPicture> pictures;
+    
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<ProductReview> reviews;
+    
     protected Product() {
     	
     }
     
+    public Product(User user, String productName, String description, double price) {
+    	this.quantity = 1;
+    	this.productName = productName;
+    	this.seller = user; 
+    	this.productDescription = description;
+    	this.price = price;
+    }
+	public List<ProductReview> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<ProductReview> reviews) {
+		this.reviews = reviews;
+	}
+
+	public List<ProductPicture> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(List<ProductPicture> pictures) {
+		this.pictures = pictures;
+	}
+
 	public long getProductId()
 	{
 		return this.productId;
@@ -89,7 +119,14 @@ public class Product{
 	{
 		return this.price;
 	}
+	
+	public void subtractQuantity(int amount) {
+		this.quantity = this.quantity - amount;
+	}
 
+	public void addToQuantity(int amount) {
+		this.quantity = this.quantity + amount;
+	}
 	public void setPrice(double price)
 	{
 		this.price = price;

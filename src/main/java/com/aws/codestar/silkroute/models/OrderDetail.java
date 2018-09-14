@@ -4,16 +4,17 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="tsr_order_detail")
+
 public class OrderDetail{ 
 	@Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-//	 @GeneratedValue(strategy=GenerationType.AUTO)
-//     @SequenceGenerator(name = "order_det_id_gen", sequenceName = "order_det_id_gen", initialValue = 50000000, allocationSize = 100)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private long orderId;
 	 
-	@OneToOne 
+	@OneToOne(cascade = {CascadeType.ALL})
     private Product product;
    
+	@ManyToOne(cascade = {CascadeType.ALL})
+	private Order order;
 
 	@Column(name="price", nullable=false)
 	private double price;
@@ -25,9 +26,10 @@ public class OrderDetail{
 		
 	}
 	
-    public OrderDetail(long orderId, Product product){
-        this.orderId = orderId;
+    public OrderDetail( Product product, int quantity, Order order){
+    	this.orderQuantity = quantity;
         this.product = product;
+        this.order = order;
     }
 	public long getOrderId()
 	{
@@ -65,6 +67,18 @@ public class OrderDetail{
 	public void setOrderQuantity(int order_quantity)
 	{
 		this.orderQuantity = order_quantity;
+	}
+	
+	public void setItemPrice() {
+		this.price = this.product.getPrice() * this.orderQuantity;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 }

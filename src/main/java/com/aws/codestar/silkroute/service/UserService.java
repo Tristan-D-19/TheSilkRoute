@@ -1,25 +1,41 @@
 package com.aws.codestar.silkroute.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 
 import com.aws.codestar.silkroute.models.User;
+import com.aws.codestar.silkroute.models.Role;
 import com.aws.codestar.silkroute.repositories.UserRepository;
+import com.aws.codestar.silkroute.repositories.RoleRepository;
 
 
 @Service
 @Repository
 @Transactional
-public class UserService {
+public class UserService  {
+	
 	
 	@Autowired
 	private UserRepository userRepo;
 
+	
+    @Autowired
+    private RoleRepository roleRepository;
+    
+   
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public List<User> adminGetAllUsers(){
 		List<User> users = new ArrayList<User>();
@@ -28,25 +44,41 @@ public class UserService {
 	}
 	
 	public List<User> getAllUsers(){
-		return null;
+		List<User> users = new ArrayList<User>();
+		userRepo.findAll().forEach(users::add);
+		return users;
 		
 	}
 	
 	
 	public boolean validateUser(String email, String password) {
 		boolean validated = false;
-		
+		validated = userRepo.findByEmail(email).getPassword().equals(password);
 		return validated;
 	}
 	
 	public User createUser(User user){
-	
+		Role customer = new Role(0, "Customer");
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(customer);
+		user.setRoles(roles);
 		User newUser = userRepo.save(user);
 		return newUser;
 	}
 	
-	public boolean createAdminUser() {
-		return false;
+	public User createAdminUser(User user) {
+		
+		
+		Role admin = new Role(1,"ADMIN");
+		Role customer = new Role(0, "CUSTOMER");
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		Set<Role> roles = new HashSet<Role>();
+		roles.add(admin);
+		roles.add(customer);
+		user.setRoles(roles);
+		User newAdminUser = userRepo.save(user);
+		return newAdminUser;
 	}
 	
 	public boolean deleteUserById(long userId) {
@@ -57,33 +89,63 @@ public class UserService {
 	
 	
 	public boolean deactivateUser(long userId) {
+		User user = userRepo.findOne(userId);
+		user.setActive(false);
+		User deactivatedUser = userRepo.save(user);
+		if(deactivatedUser.getActive() == false)
+		return true;
+		
 		return false;
 	}
 	
 	
 	public boolean reactivateUser(long userId) {
+		User user = userRepo.findOne(userId);
+		user.setActive(true);
+		User deactivatedUser = userRepo.save(user);
+		if(deactivatedUser.getActive() == true)
+		return true;
+		
 		return false;
 	}
 	
 	
-	public boolean updateUser(User user){
-		return false;
+	public User updateUser(User user){
+		User updatedUser = userRepo.save(user);
+		return updatedUser;
 	}
 	
 	
-	public User findUserByEmail(String email) {
-//		User user = userRepo.findUserByEmail(email);
-		return null;
-	}
 	
-	
-	public User findUserById(Long userId) {
+	public User findUserById(long userId) {
 		User user = userRepo.findOne(userId);
 		return user;
 	}
 	
 	
-	public boolean changeUserPassword() {
+	public boolean changeUserPassword(String password, long user_id) {
+		User user = userRepo.findOne(user_id);
+		user.setPassword(password);
+		User changedUser = userRepo.save(user);
+		if(changedUser.getPassword().equals(user.getPassword()))
+		return true;
+		
 		return false;
+	}
+
+	
+	public void save(User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+		Role userRole = roleRepository.findByRole("CUSTOMER");
+		user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+		
+	        userRepo.save(user);
+		
+	}
+
+	
+	public User findUserByEmail(String email) {
+		
+		return userRepo.findByEmail(email);
 	}
 }

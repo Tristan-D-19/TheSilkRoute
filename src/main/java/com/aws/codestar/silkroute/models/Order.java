@@ -1,7 +1,8 @@
 package com.aws.codestar.silkroute.models;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.*;
@@ -12,19 +13,16 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="tsr_order")
+
 public class Order{
 
 	@Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-//	 @GeneratedValue(strategy=GenerationType.AUTO)
-//    @SequenceGenerator(name = "order_id_gen", sequenceName = "order_id_gen", initialValue = 50000000, allocationSize = 100)
     private long orderId;
 	
-	protected Order() {
-		
-	}
 	
-	@OneToOne
+	
+	@OneToOne(cascade = {CascadeType.ALL})
     private User customer;
 	
 	@Column(name="creation_date", nullable=false)
@@ -36,9 +34,18 @@ public class Order{
 	@Column(name="order_price", nullable=false)
     private double orderPrice;
     
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<OrderDetail> items = new ArrayList<OrderDetail>();
 
+	protected Order() {
+			
+		}
+	
+	//create a new order with the customers id and the current date
+    public Order(User user){
+    	this.creationDate = new Date(Calendar.getInstance().getTime().getTime());
+    	this.customer = user;
+    }
     public User getCustomer() {
 		return customer;
 	}
@@ -51,10 +58,7 @@ public class Order{
 	public void setItems(List<OrderDetail> items) {
 		this.items = items;
 	}
-	//create a new order with the customers id and the current date
-    public Order(long customer_id, Date creationDate){
-
-    }
+	
 	public long getOrderId()
 	{
 		return this.orderId;
@@ -71,9 +75,10 @@ public class Order{
 		return this.creationDate;
 	}
 
-	public void setCreationDate(Date creationDate)
+	public void setCreationDate(java.util.Date creationDate)
 	{
 		this.creationDate = creationDate;
+;
 	}
 
 	public Date getShippingDate()

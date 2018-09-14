@@ -18,6 +18,21 @@ public class ProductPicture implements Serializable{
 //    @SequenceGenerator(name = "product_id_gen", sequenceName = "product_id_gen", initialValue = 50000000, allocationSize = 100)
 	private long productPicId; 
 	
+
+	@OneToOne(cascade = {CascadeType.ALL})
+    private Product product;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+    private Picture picture;
+    
+    
+	protected ProductPicture() {
+		
+	}
+    public ProductPicture(Product product, Picture pic) {
+    	this.product = product;
+    	this.picture = pic;
+    }
 	
 	public long getProductPicId() {
 		return productPicId;
@@ -25,18 +40,7 @@ public class ProductPicture implements Serializable{
 	public void setProductPicId(long productPicId) {
 		this.productPicId = productPicId;
 	}
-	@OneToOne 
-    private Product product;
 	
-	@OneToOne
-    private Picture picture;
-    
-    
-	protected ProductPicture() {
-		
-		
-	}
-    
 	public Product getProduct() {
 		return product;
 	}
