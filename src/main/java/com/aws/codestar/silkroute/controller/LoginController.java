@@ -19,7 +19,7 @@ public class LoginController {
 	}
 
 	public ModelAndView authorize_user(@RequestParam("email") String email, @RequestParam("password") String password) {
-		ModelAndView mav = new ModelAndView("Market");
+		ModelAndView mav = new ModelAndView("market");
 		mav.addObject(email);
 		mav.addObject(password);
 		

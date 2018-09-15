@@ -22,6 +22,8 @@ import javax.persistence.*;
 /**
  * This class is a representation of the user for TSR. This class contains all data relating to all users.  
  */
+
+
  @Entity
  @Table(name="tsr_user")
 public class User implements Serializable {
@@ -55,15 +57,15 @@ public class User implements Serializable {
      @Column(name="city")
     private String city;
      @Column(name="zipcode")
-    private int zipcode; 
+    private Integer zipcode; 
      @Column(name="state")
     private String state; 
      @Column(name="phone")
     private String phone;
      
      @ManyToMany(cascade = {CascadeType.ALL})
-     @JoinTable(name = "roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles;
+     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+     private Set<Role> roles;
      
      @Column(name="date_joined", nullable=false)
 	private Date dateJoined;
@@ -82,6 +84,25 @@ public class User implements Serializable {
      public User() {
     	 
      }
+     
+     public User(User user) {
+    	 this.userId = user.getUserId();
+    	 this.active = user.getActive();
+    	 this.address = user.getAddress();
+    	 this.city = user.getAddress();
+    	 this.firstName = user.getFirstName();
+    	 this.lastName = user.getLastName();
+    	 this.email = user.getEmail();
+    	 this.password = user.getPassword();
+    	 
+    	 this.dateJoined = user.getDateJoined();
+    	 this.phone = user.getPhone();
+    	 this.profilePic = user.getProfilePic();
+    	 this.roles = user.getRoles();
+    	 this.state = user.getState();
+    	 this.zipcode = 0;
+//    	 this.zipcode =  ((Integer) user.getZipcode() == null) ? 0: user.getZipcode(); //check for null 
+     }
 	//-----------------------------------------------------------------------------------------------
      
 
@@ -92,6 +113,7 @@ public class User implements Serializable {
           this.email = email;
           this.dateJoined = new Date(Calendar.getInstance().getTime().getTime());
           this.active = true;
+          this.zipcode = 0;
 //          Set<UserType> types = new HashSet<UserType>();
 //          this.setUserTypes(pending);
       }

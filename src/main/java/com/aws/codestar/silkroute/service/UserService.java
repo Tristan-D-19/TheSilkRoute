@@ -26,6 +26,27 @@ import com.aws.codestar.silkroute.repositories.RoleRepository;
 @Transactional
 public class UserService  {
 	
+	public void init_admin_roles() {
+		if (roleRepository.findByRoleAccess(1) == null)
+		{
+			Role admin = new Role(1, "ADMIN");
+	        Role user = new Role(0, "USER");
+	           
+	        Set<User> users = new HashSet<User>();
+	        User adminUser = new User("tristand.thomas19@gmail.com", "tsr_admin", "tsr_admin", "$lowJaguar29");
+	        users.add(adminUser);
+	        
+	        admin.setUsers(users);
+	        user.setUsers(users);
+	        Set<Role> roles = new HashSet<Role>();
+	        roles.add(admin);
+	        roles.add(user);
+	        admin = roleRepository.save(admin);
+	        user = roleRepository.save(user);
+	        adminUser.setRoles(roles);
+	        adminUser = userRepo.save(adminUser);
+		}
+	}
 	
 	@Autowired
 	private UserRepository userRepo;
@@ -53,12 +74,12 @@ public class UserService  {
 	
 	public boolean validateUser(String email, String password) {
 		boolean validated = false;
-		validated = userRepo.findByEmail(email).getPassword().equals(password);
+		validated = userRepo.findByEmail(email).get().getPassword().equals(password);
 		return validated;
 	}
 	
 	public User createUser(User user){
-		Role customer = new Role(0, "Customer");
+		Role customer = new Role(0, "USER");
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(customer);
@@ -71,7 +92,7 @@ public class UserService  {
 		
 		
 		Role admin = new Role(1,"ADMIN");
-		Role customer = new Role(0, "CUSTOMER");
+		Role customer = new Role(0, "USER");
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(admin);
@@ -146,6 +167,6 @@ public class UserService  {
 	
 	public User findUserByEmail(String email) {
 		
-		return userRepo.findByEmail(email);
+		return userRepo.findByEmail(email).get();
 	}
 }

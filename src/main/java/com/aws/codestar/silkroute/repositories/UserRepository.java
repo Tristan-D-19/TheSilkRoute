@@ -1,6 +1,7 @@
 package com.aws.codestar.silkroute.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aws.codestar.silkroute.models.User;
 
-
+@Repository
+@Transactional
 public interface UserRepository  extends CrudRepository <User, Long> {
 	 
 		/**
@@ -20,7 +22,7 @@ public interface UserRepository  extends CrudRepository <User, Long> {
 		 * @return a user from the database
 		 */
 //		@Query("select u from tsr_admin.tsr_user u where LOWER(u.EMAIL) = LOWER(:email)")
-		 public User findByEmail(String email);
+		 public Optional<User> findByEmail(String email);
 		  
 		
 		/**

@@ -3,6 +3,7 @@ package com.aws.codestar.silkroute.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -42,7 +43,7 @@ public class UserController {
     }
     
     @PostMapping("/registration")
-    public ModelAndView registration(@Valid @ModelAttribute("newUser") User newUser, BindingResult bindingResult) {
+    public ModelAndView registration(@Valid @ModelAttribute("user") User newUser, BindingResult bindingResult) {
         userValidator.validate(newUser, bindingResult);
 
         ModelAndView reg = new ModelAndView("registration");
@@ -87,21 +88,11 @@ public class UserController {
         return mav;
     }
 
-    @GetMapping(value = {"/", "/welcome"})
+    @PreAuthorize("hasAnyRole('USER')")
+    @GetMapping(value = {"/silk/home"})
     public ModelAndView home( ) {
     	ModelAndView home = new ModelAndView("home");
         return home;
     }
     
-    @GetMapping(value="/admin/home")
-    public ModelAndView admin(){
-        ModelAndView mav = new ModelAndView();
-        
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(auth.getName());
-        mav.addObject("userName", "Welcome " + user.getName() + " (" + user.getEmail() + ")");
-        mav.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        mav.setViewName("admin/home");
-        return mav;
-    }
 }

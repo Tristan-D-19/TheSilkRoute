@@ -31,15 +31,16 @@
                     <a class="hiddenanchor" id="toregister2"></a>
                     <div id="wrapper">
                         <div id="login" class="animate form">
-                            <form  action="/login" autocomplete="on" method="post" modelAttribute="user"> 
+                            <form:form  action="/login" autocomplete="on" method="POST" modelAttribute="user"> 
                                 <h1>Log in</h1> 
                                 <p> 
-                                    <label for="email" class="email" > Your First Name </label>
-                                    <input id="email" path="email" required="required" type="text" placeholder="mymail@mail.com"/>
+                                    <label for="email" class="email" >Email</label>
+                                    <form:input id="email" path="email" required="required" type="text" placeholder="mymail@mail.com"/>
                                 </p>
                                 <p> 
                                     <label for="password" class="youpasswd"> Your password </label>
-                                    <input id="password" path="password" required="required" type="password" placeholder="eg. X8df!90EO" /> 
+                                    <form:input id="password" path="password" required="required" type="password" placeholder="eg. X8df!90EO" />
+                                    <form:errors path="password"/> 
                                 </p>
                                 <p class="keeplogin"> 
 									<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
@@ -52,7 +53,7 @@
 									Not a member yet ?
 									<a href="#toregister1" class="to_register1">Join us</a>
 								</p>
-                            </form>
+                            </form:form>
                         </div>
 <!-- ---------------------------------------------------------------------------------------------->                      
                         <div id="register-forms" class="animate form">

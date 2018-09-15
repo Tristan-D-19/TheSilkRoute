@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "role")
+@Table(name = "tsr_role")
 public class Role implements Serializable {
 
 	/**

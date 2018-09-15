@@ -15,7 +15,6 @@ com\aws\codestar\silkroute\DAO\AccountDAOI$SQL.class
 com\aws\codestar\silkroute\DAO\ProductReviewDAOI.class
 com\aws\codestar\silkroute\repositories\ProductReviewRepository.class
 com\aws\codestar\silkroute\repositories\ProductRepository.class
-com\aws\codestar\silkroute\service\SecurityServiceImpl.class
 com\aws\codestar\silkroute\models\ProductPicture.class
 com\aws\codestar\silkroute\DAO\PictureDAOI$SQL.class
 com\aws\codestar\silkroute\DAO\ProductDAOI.class
@@ -40,11 +39,13 @@ com\aws\codestar\silkroute\DAO\AccountDAOI.class
 com\aws\codestar\silkroute\Application.class
 com\aws\codestar\silkroute\controller\IndexController.class
 com\aws\codestar\silkroute\repositories\AccountRepository.class
+com\aws\codestar\silkroute\service\AuthService.class
 com\aws\codestar\silkroute\DAO\DepartmentDAOI$SQL.class
 com\aws\codestar\silkroute\models\Order.class
 com\aws\codestar\silkroute\repositories\BillingInfoRepository.class
 com\aws\codestar\silkroute\DAO\UserTypeDAOI.class
 com\aws\codestar\silkroute\models\User.class
+com\aws\codestar\silkroute\controller\AdminController.class
 com\aws\codestar\silkroute\controller\LoginController.class
 com\aws\codestar\silkroute\DAO\UserDAOI$SQL.class
 com\aws\codestar\silkroute\repositories\ProductPictureRepository.class
@@ -52,7 +53,9 @@ com\aws\codestar\silkroute\DAO\UserTypeDAOI$SQL.class
 com\aws\codestar\silkroute\WebSecurityConfig.class
 com\aws\codestar\silkroute\service\AccountService.class
 com\aws\codestar\silkroute\models\Account.class
+com\aws\codestar\silkroute\service\CustomUserDetails.class
 com\aws\codestar\silkroute\DAO\BillingInfoDAOI.class
 com\aws\codestar\silkroute\DAO\OrderDAOI$SQL.class
 com\aws\codestar\silkroute\repositories\UserRepository.class
 com\aws\codestar\silkroute\repositories\RoleRepository.class
+com\aws\codestar\silkroute\listener\AppContextListener.class

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Before;
@@ -67,6 +68,7 @@ public void testUserRepo() {
 
 @Test
 public void should_find_no_users_if_repository_is_empty() {
+	userRepo.deleteAll();
 	Iterable<User> users = userRepo.findAll();
 
 	assertThat(users).isEmpty();
@@ -84,6 +86,7 @@ public void should_create_user() throws Exception{
 
 @Test
 public void should_find_all_users() {
+	userRepo.deleteAll();
 	User user1 = new User("test1", "first", "last", "password");
 	User user2 = new User("test2", "first", "last", "password");
 	User user3 = new User("test3", "first", "last", "password");
@@ -128,8 +131,8 @@ public void should_find_user_by_email(){
 	
 	User user2 = new User("sam@gmail.com", "Sam", "Smith", "password");
 	entityManager.persist(user2);
-	User foundUser = userRepo.findByEmail(user2.getEmail());
-	assertThat(foundUser).isEqualTo(user2);
+	Optional<User> foundUser = userRepo.findByEmail(user2.getEmail());
+	assertThat(foundUser.get()).isEqualTo(user2);
 }
 
 
@@ -208,6 +211,7 @@ public void should_change_password() {
 
 @Test
 public void should_find_all_users_read_only() {
+	userRepo.deleteAll();
 	User user1 = new User("test1", "first", "last", "password");
 	User user2 = new User("test2", "first", "last", "password");
 	User user3 = new User("test3", "first", "last", "password");

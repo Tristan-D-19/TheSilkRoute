@@ -1,5 +1,6 @@
 body {
-  background-image: linear-gradient(to left top, #17a2b8, #14abc4, #12b3d1, #11bcde, #12c5eb);
+	background:#2AAB99;
+  background-image: background:#2AAB99 linear-gradient(to left top, #17a2b8, #14abc4, #12b3d1, #11bcde, #12c5eb);
   height: 100vh;
 }
 #login .container #login-row #login-column .login-box {

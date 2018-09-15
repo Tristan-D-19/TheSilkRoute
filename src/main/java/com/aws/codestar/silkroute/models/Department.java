@@ -1,8 +1,8 @@
 package com.aws.codestar.silkroute.models;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.SequenceGenerator;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -21,6 +21,10 @@ public class Department{
 	 @Column(name="description", nullable=false)
     private String description; 
     
+	 @ManyToMany(cascade = {CascadeType.ALL})
+	 private Set<Product> products = new HashSet<Product>();
+	 
+	 
 	 protected Department() {
 		 
 	 }
@@ -48,6 +52,12 @@ public class Department{
 		this.departmentName = departmentName;
 	}
 
+	public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 	public String getDescription()
 	{
 		return this.description;

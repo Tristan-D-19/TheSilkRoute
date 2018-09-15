@@ -14,8 +14,6 @@ public class Account {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@GeneratedValue(strategy=GenerationType.AUTO)
-//	@SequenceGenerator(name = "account_id_gen", sequenceName = "account_id_gen", initialValue = 50000000, allocationSize = 100)
     private long accountId;
 	
 	@OneToOne(cascade = {CascadeType.ALL})

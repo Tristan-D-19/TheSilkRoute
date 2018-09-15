@@ -2,6 +2,11 @@ package com.aws.codestar.silkroute.DAO;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +16,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.aws.codestar.silkroute.models.Department;
+import com.aws.codestar.silkroute.models.Product;
+import com.aws.codestar.silkroute.models.User;
 import com.aws.codestar.silkroute.repositories.DepartmentRepository;
 
 @ActiveProfiles("test")
@@ -53,4 +60,32 @@ public class DepartmentDAOTest {
 		assertThat(dep).isEqualTo(createdDep);
 	}
 	
+	@Test 
+	public void should_find_dep_by_products() {
+		departmentRepo.deleteAll();
+		List<Department> deps = new ArrayList<Department>();
+		
+		Department engineering = new Department("Engineering","engineering and IOT");
+		Department webdev = new Department("Web Development", "website development, full stack, word press, and all web frameworks");
+		Department graphicDesign = new Department("Graphic Design", "Logos, banners, and all designs");
+		
+		deps.add(engineering);
+		deps.add(webdev);
+		deps.add(graphicDesign);
+		User user = new User("test@gmail.com", "first", "last", "password");
+		Product product1 = new Product(user, "Website", "fully functional website", 200);
+		product1.setDepartments(deps);
+		Product product2 = new Product(user, "Website", "fully functional website", 200);
+		product2.setDepartments(deps);
+		Product product3 = new Product(user, "Website", "fully functional website", 200);
+		product3.setDepartments(deps);
+		Set<Product> prods = new HashSet<Product>();
+		prods.add(product1);
+		prods.add(product2);
+		prods.add(product3);
+		
+		List<Department> foundDeparments = departmentRepo.findByProducts(prods);
+		
+		assertThat(foundDeparments).hasSize(3).contains(engineering, webdev, graphicDesign);
+	}
 }

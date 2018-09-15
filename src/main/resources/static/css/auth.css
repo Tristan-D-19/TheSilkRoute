@@ -46,7 +46,7 @@ footer, header, hgroup, menu, nav, section {
 /* General Demo Style */
 body{
 	font-family: Cambria, Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
-	background: 29A5A5  repeat top left;
+	background: #2AAB99 repeat top left;
 	font-weight: 400;
 	font-size: 15px;
 	color: #1d3c41;
@@ -112,7 +112,7 @@ a{
 	float: left;
 }
 .codrops-top a:hover{
-	background: #fff;
+	background: #2AAB99;
 }
 .codrops-top span.right{
 	float: right;
@@ -159,7 +159,7 @@ a{
 /* remove codrops styles and reset the whole thing */
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 body{
-background: #29A5A5
+background: #2AAB99
 background-attachment:fixed;
 background-size:cover;
 }
@@ -464,8 +464,27 @@ p.change_link{
 #login{
 	z-index: 22;
 }
+
 #toregister1:target ~ #wrapper #register-forms #register1,
-#toregister2:target ~ #wrapper #register-forms #register2,
+#toregister2:target ~ #wrapper #register-forms #register2
+{
+	-webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
+-moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
+box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
+	z-index: 22;
+	-webkit-animation-name: fadeInLeft;
+	-moz-animation-name: fadeInLeft;
+	-ms-animation-name: fadeInLeft;
+	-o-animation-name: fadeInLeft;
+	animation-name: fadeInLeft;
+	-webkit-animation-delay: .1s;
+	-moz-animation-delay: .1s;
+	-o-animation-delay: .1s;
+	-ms-animation-delay: .1s;
+	animation-delay: .1s;
+	
+}
+
 #tologin:target ~ #wrapper #login{
 	-webkit-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
 -moz-box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
@@ -491,6 +510,15 @@ box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
 	-o-animation-name: fadeOutLeft;
 	animation-name: fadeOutLeft;
 	
+}
+
+#tologin:target ~ #wrapper #register-forms #register1{
+	-webkit-animation-name: fadeOutLeft;
+	-moz-animation-name: fadeOutLeft;
+	-ms-animation-name: fadeOutLeft;
+	-o-animation-name: fadeOutLeft;
+	animation-name: fadeOutLeft;
+	display:unset;
 }
 
 #toregister1:target ~ #wrapper #login,

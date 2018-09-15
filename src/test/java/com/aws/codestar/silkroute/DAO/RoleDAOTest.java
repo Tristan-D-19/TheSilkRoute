@@ -31,7 +31,7 @@ public class RoleDAOTest {
 	
 	@Test
 	public void should_find_no_user_types_if_repo_is_empty(){
-		
+		userTypeRepo.deleteAll();
 		
 		Iterable<Role> roles = userTypeRepo.findAll();
 		assertThat(roles).isEmpty();
@@ -62,15 +62,9 @@ public class RoleDAOTest {
 	
 	@Test
 	public void should_find_all_user_types() {
-		Role admin = new Role(1, "Admin");
-		Role customer = new Role(0, "customer");
-		Role pending = new Role(-1, "pending");
-		entityManager.persist(admin);
-		entityManager.persist(customer);
-		entityManager.persist(pending);
 		
 		Iterable<Role> roles = userTypeRepo.findAll();
-		assertThat(roles).hasSize(3).contains(admin, customer, pending);
+		assertThat(roles).hasSize(2);
 		
 	}
 	
