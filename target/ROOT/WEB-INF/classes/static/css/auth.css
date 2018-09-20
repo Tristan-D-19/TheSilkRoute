@@ -159,8 +159,8 @@ a{
 /* remove codrops styles and reset the whole thing */
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 body{
-background: #2AAB99
-background-attachment:fixed;
+background: #2AAB99;
+background-attachment: fixed;
 background-size:cover;
 }
 #container_demo{
@@ -181,7 +181,8 @@ a.hiddenanchor{
 	min-height: 560px;	
 	margin: 0px auto;	
 	width: 500px;
-	position: relative;	
+	position: relative;
+	
 }
 /**** Styling the form elements **/
 
@@ -431,6 +432,10 @@ p.change_link{
 	position: relative;
 	top: 1px;
 }
+
+form.active{
+	display:block;
+}
 /** Styling all forms **/
 #register1, #register2, #register-forms
 #login{
@@ -458,7 +463,7 @@ p.change_link{
 }
 #register-forms{
 	opacity: -1;
-	display:none;
+	
 }
 
 #login{
@@ -523,7 +528,7 @@ box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.36);
 
 #toregister1:target ~ #wrapper #login,
 #tologin:target ~ #wrapper #register-forms #register1,
-#toregister1:target~ #wrapper.#register-forms #register2{
+#toregister1:target~ #wrapper #register-forms #register2{
  animation-name: fadeOutLeftBig;
 }
 

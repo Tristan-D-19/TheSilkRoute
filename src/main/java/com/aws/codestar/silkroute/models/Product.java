@@ -25,6 +25,7 @@ public class Product{
     private User seller;
 	 
 	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name = "departments", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "department_id"))
 	private List<Department> departments = new ArrayList<Department>();
 	
 

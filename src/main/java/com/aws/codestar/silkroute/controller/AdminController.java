@@ -10,9 +10,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.aws.codestar.silkroute.models.User;
 
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin/*")
 @RestController
-@PreAuthorize("hasAnyRole('ADMIN')")
+@PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
 	
@@ -29,7 +29,7 @@ public class AdminController {
 		return adminHome;
 	}
 	
-	@GetMapping("/users")
+	@GetMapping("/users/all")
 	public ModelAndView adminGetUsers(){
 	ModelAndView mav = new ModelAndView("admin-all-users");
 		return mav;

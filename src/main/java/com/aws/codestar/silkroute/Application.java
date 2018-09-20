@@ -10,9 +10,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import com.aws.codestar.silkroute.models.Role;
 import com.aws.codestar.silkroute.models.User;
@@ -28,18 +30,14 @@ import com.aws.codestar.silkroute.service.UserService;
  *  @ComponentScan
  */
 
-@ComponentScan
+
 @SpringBootApplication
 @EnableJpaRepositories(basePackages = "com.aws.codestar.silkroute.repositories")
-
+@EnableWebSecurity
 public class Application extends SpringBootServletInitializer {
 
-	@Autowired
-	private static UserService userService;
 	
-	public static void createAdmin() {
-		userService.init_admin_roles();
-	}
+	
 	
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
     

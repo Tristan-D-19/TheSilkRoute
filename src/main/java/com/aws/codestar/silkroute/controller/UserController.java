@@ -1,98 +1,68 @@
 package com.aws.codestar.silkroute.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.aws.codestar.silkroute.Application;
 import com.aws.codestar.silkroute.models.User;
 import com.aws.codestar.silkroute.service.SecurityService;
 import com.aws.codestar.silkroute.service.UserService;
 import com.aws.codestar.silkroute.validator.UserValidator;
 
 @RestController
+@RequestMapping("users")
 public class UserController {
+
+	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 	@Autowired
     private UserService userService;
+	
+	
 
-//    @Autowired
-//    private SecurityService securityService;
-    
-    @Autowired
-    private UserValidator userValidator;
-    
-    
-    @GetMapping("/registration")
-    public ModelAndView registration() {
-		
-    	ModelAndView mav = new ModelAndView("registration");
+
+
+    @RequestMapping("{id}")
+    public ModelAndView handleRequestById (@PathVariable("id") long id) {
+//        model.addAttribute("msg", "user request received for the id : " + id);
+//        LOGGER.info(model.toString());
+    	ModelAndView mav = new ModelAndView("user-profile");
+    	User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	User user = userService.findUserById(id);
+    	if(loggedInUser.getUserId() == id)
+    		return mav;
+    	else 
+    	return new ModelAndView("unauthorized");
+    			
     	
-    	mav.addObject("newUser", new User()); //add empty user to form 
+       
+    }
+    
+   
+    @GetMapping("all")
+    public ModelAndView nonAdminGetAllUsers() {
+    	ModelAndView mav = new ModelAndView("all-users");
     	
     	return mav;
     }
     
-    @PostMapping("/registration")
-    public ModelAndView registration(@Valid @ModelAttribute("user") User newUser, BindingResult bindingResult) {
-        userValidator.validate(newUser, bindingResult);
-
-        ModelAndView reg = new ModelAndView("registration");
-        ModelAndView home = new ModelAndView("home");
-        
-        User userExists = userService.findUserByEmail(newUser.getEmail());
-        
-        if (userExists != null) {
-            bindingResult
-                    .rejectValue("email", "error.user",
-                            "There is already a user registered with the email provided");
-        }
-        
-        if (bindingResult.hasErrors()) { //error return to registration
-            return reg;
-        }
-
-        else {
-            userService.createUser(newUser);
-            reg.addObject("successMessage", "User has been registered successfully");
-            reg.addObject("user", new User());
-            reg.setViewName("registration");
-            return reg;
-        }   
-
-        //login user
-//        securityService.autologin(newUser.getEmail(), newUser.getPasswordConfirm());
-
-//        return home;
-    }
-    
-    @GetMapping("/login")
-    public ModelAndView login(String error, String logout) {
-    	 ModelAndView mav = new ModelAndView("login");
-    	 mav.addObject("user", new User());
-        if (error != null)
-            mav.addObject("error", "Your username and password is invalid.");
-
-        if (logout != null)
-        	 mav.addObject("message", "You have been logged out successfully.");
-
-        return mav;
-    }
-
-    @PreAuthorize("hasAnyRole('USER')")
-    @GetMapping(value = {"/silk/home"})
-    public ModelAndView home( ) {
-    	ModelAndView home = new ModelAndView("home");
-        return home;
-    }
-    
+   
 }

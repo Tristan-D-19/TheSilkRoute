@@ -32,6 +32,8 @@ public class ProductDAOTest {
 	
 	@Test
 	public void should_find_no_products_if_repo_is_empty(){
+		prodRepo.deleteAll();
+
 		Iterable<Product> products = prodRepo.findAll();
 		assertThat(products).isEmpty();
 	}
@@ -96,6 +98,8 @@ public class ProductDAOTest {
 	
 	@Test
 	public void should_find_products_by_user() {
+		prodRepo.deleteAll();
+
 		User user = new User("test@gmail.com", "first", "last", "password");
 			
 		Product product1 = new Product(user, "Website", "fully functional website", 200);
@@ -116,6 +120,8 @@ public class ProductDAOTest {
 	
 	@Test
 	public void should_find_product_by_price() {
+		prodRepo.deleteAll();
+
 		User user = new User("test@gmail.com", "first", "last", "password");
 		
 		Product product1 = new Product(user, "Website", "fully functional website", 200);
@@ -146,5 +152,36 @@ public class ProductDAOTest {
 		Product updatedProduct = prodRepo.save(product);
 		assertThat(product).isEqualTo(updatedProduct);
 		
+		
+	}
+	
+	@Test
+	public void should_search_for_like_name() {
+List<Department> deps = new ArrayList<Department>();
+		prodRepo.deleteAll();
+		Department engineering = new Department("Engineering","engineering and IOT");
+		Department webdev = new Department("Web Development", "website development, full stack, word press, and all web frameworks");
+		Department graphicDesign = new Department("Graphic Design", "Logos, banners, and all designs");
+		
+		deps.add(engineering);
+		deps.add(webdev);
+		deps.add(graphicDesign);
+		
+		User user = new User("test@gmail.com", "first", "last", "password");
+		
+		
+		Product product1 = new Product(user, "Website", "fully functional website", 200);
+		product1.setDepartments(deps);
+		Product product2 = new Product(user, "Website", "fully functional website", 200);
+		product2.setDepartments(deps);
+		Product product3 = new Product(user, "Website", "fully functional website", 200);
+		product3.setDepartments(deps);
+		
+		entityManager.persist(product1);
+		entityManager.persist(product2);
+		entityManager.persist(product3);
+		String keyword = "Websi";
+		Iterable<Product> products = prodRepo.findByProductNameIgnoreCaseContaining(keyword);
+		assertThat(products).hasSize(3).contains(product1, product2, product3);	
 	}
 }

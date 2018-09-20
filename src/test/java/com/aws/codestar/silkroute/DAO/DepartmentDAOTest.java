@@ -33,6 +33,7 @@ public class DepartmentDAOTest {
 	
 	@Test
 	public void should_find_no_departments_if_repo_is_empty() {
+		departmentRepo.deleteAll();
 		Iterable<Department> departments = departmentRepo.findAll();
 
 		assertThat(departments).isEmpty();
@@ -47,6 +48,7 @@ public class DepartmentDAOTest {
 	
 	@Test 
 	public void shoud_find_department_by_department_name() {
+		departmentRepo.deleteAll();
 		Department dep = new Department( "Graphic Design", "Create and design for clients and other artist in need of graphical work");
 		entityManager.persist(dep);
 		Department foundDep = departmentRepo.findByDepartmentName(dep.getDepartmentName());
@@ -60,7 +62,7 @@ public class DepartmentDAOTest {
 		assertThat(dep).isEqualTo(createdDep);
 	}
 	
-	@Test 
+//	@Test 
 	public void should_find_dep_by_products() {
 		departmentRepo.deleteAll();
 		List<Department> deps = new ArrayList<Department>();
@@ -79,13 +81,23 @@ public class DepartmentDAOTest {
 		product2.setDepartments(deps);
 		Product product3 = new Product(user, "Website", "fully functional website", 200);
 		product3.setDepartments(deps);
+		entityManager.persist(product1);
+		entityManager.persist(product2);
+		entityManager.persist(product3);
+		entityManager.persist(user);
 		Set<Product> prods = new HashSet<Product>();
+//		List<Product> prods = new ArrayList<Product>();
 		prods.add(product1);
 		prods.add(product2);
 		prods.add(product3);
 		
-		List<Department> foundDeparments = departmentRepo.findByProducts(prods);
 		
+		entityManager.persist(engineering);
+		entityManager.persist(webdev);
+		entityManager.persist(graphicDesign);
+		
+		Iterable <Department> foundDeparments = departmentRepo.findDepartmentsByProductsIn(prods);
+//		Iterable<Department> foundDeparments =  departmentRepo.findAll();
 		assertThat(foundDeparments).hasSize(3).contains(engineering, webdev, graphicDesign);
 	}
 }

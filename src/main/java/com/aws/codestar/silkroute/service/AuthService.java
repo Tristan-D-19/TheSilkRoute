@@ -18,21 +18,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class AuthService implements UserDetailsService {
 
 	@Autowired
     private UserRepository userRepository;
 	
 	@Override
-	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		Optional <User> optionalUser = userRepository.findByEmail(email);
 		
 		//user does not exist
 		optionalUser.orElseThrow(() -> new UsernameNotFoundException("User does not exist. Please register."));
 		//else user exist return user
-		return optionalUser.map(CustomUserDetails::new).get();
+		return optionalUser.get();
 		
 		
 	}

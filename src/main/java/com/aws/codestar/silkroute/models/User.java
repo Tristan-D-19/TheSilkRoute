@@ -2,8 +2,10 @@ package com.aws.codestar.silkroute.models;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 //import java.util.Date;
  import javax.persistence.Entity;
@@ -15,6 +17,10 @@ import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer.UserDetailsBuilder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.annotation.Nullable;
 import javax.persistence.*;
@@ -26,7 +32,7 @@ import javax.persistence.*;
 
  @Entity
  @Table(name="tsr_user")
-public class User implements Serializable {
+public class User implements Serializable, UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
@@ -57,7 +63,7 @@ public class User implements Serializable {
      @Column(name="city")
     private String city;
      @Column(name="zipcode")
-    private Integer zipcode; 
+    private Integer zipcode = 0; 
      @Column(name="state")
     private String state; 
      @Column(name="phone")
@@ -79,15 +85,25 @@ public class User implements Serializable {
      @Transient //not persisted to DB
      private String passwordConfirm;
      
+ 	@Column(name = "confirmation_token")
+ 	private String confirmationToken;
+
+ 	public String getConfirmationToken() {
+ 		return confirmationToken;
+ 	}
+
+ 	public void setConfirmationToken(String confirmationToken) {
+ 		this.confirmationToken = confirmationToken;
+ 	}
     //Constructor 
 
      public User() {
-    	 
+    	
      }
      
      public User(User user) {
     	 this.userId = user.getUserId();
-    	 this.active = user.getActive();
+    	 this.active = true;
     	 this.address = user.getAddress();
     	 this.city = user.getAddress();
     	 this.firstName = user.getFirstName();
@@ -188,12 +204,12 @@ public class User implements Serializable {
 		this.city = city;
 	}
 
-	public int getZipcode()
+	public Integer getZipcode()
 	{
 		return this.zipcode;
 	}
 
-	public void setZipcode(int zipcode)
+	public void setZipcode(Integer zipcode)
 	{
 		this.zipcode = zipcode;
 	}
@@ -303,6 +319,45 @@ public class User implements Serializable {
 	public static UserDetailsBuilder withDefaultPasswordEncoder() {
 		
 		return null;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return this.roles
+				.stream()
+				.map(role -> new SimpleGrantedAuthority("ROLE_"+role.getRole()))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

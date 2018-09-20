@@ -64,6 +64,9 @@ public interface UserRepository  extends CrudRepository <User, Long> {
 		  	@Query("SELECT u FROM User u where u.active =true")
 		    @Transactional(readOnly =true)
 		    public List<User> readAll();
+
+
+			public User findByConfirmationToken(String confirmationToken);
 		  	
 		  
 		

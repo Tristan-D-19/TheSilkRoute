@@ -1,12 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="search-box">
+    <input class="search-txt" type="text" name="" placeholder="Products, Service, Designs, etc..">
+    <a class="search-btn" href="#">
+        <i class="fas fa-search"></i>
+    </a>
+</div>

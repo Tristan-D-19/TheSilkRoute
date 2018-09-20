@@ -2,6 +2,8 @@ package com.aws.codestar.silkroute.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.sql.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,8 +27,22 @@ import com.aws.codestar.silkroute.repositories.RoleRepository;
 @Repository
 @Transactional
 public class UserService  {
-	
+
+	@Autowired
+	private UserRepository userRepo;
+
+	 @Autowired
+	    public UserService(UserRepository userRepo) { 
+	      this.userRepo = userRepo;
+	    }
+    @Autowired
+    private RoleRepository roleRepository;
+    
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    
 	public void init_admin_roles() {
+		
 		if (roleRepository.findByRoleAccess(1) == null)
 		{
 			Role admin = new Role(1, "ADMIN");
@@ -48,15 +64,7 @@ public class UserService  {
 		}
 	}
 	
-	@Autowired
-	private UserRepository userRepo;
-
-	
-    @Autowired
-    private RoleRepository roleRepository;
-    
    
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	public List<User> adminGetAllUsers(){
 		List<User> users = new ArrayList<User>();
@@ -84,6 +92,7 @@ public class UserService  {
 		Set<Role> roles = new HashSet<Role>();
 		roles.add(customer);
 		user.setRoles(roles);
+		user.setDateJoined( new Date(Calendar.getInstance().getTime().getTime()));
 		User newUser = userRepo.save(user);
 		return newUser;
 	}
@@ -167,6 +176,12 @@ public class UserService  {
 	
 	public User findUserByEmail(String email) {
 		
-		return userRepo.findByEmail(email).get();
+		return userRepo.findByEmail(email)
+				.orElse(null);
 	}
+	
+	public User findByConfirmationToken(String confirmationToken) {
+		return userRepo.findByConfirmationToken(confirmationToken);
+	}
+	
 }

@@ -21,7 +21,7 @@ public class Department{
 	 @Column(name="description", nullable=false)
     private String description; 
     
-	 @ManyToMany(cascade = {CascadeType.ALL})
+	 @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "departments")
 	 private Set<Product> products = new HashSet<Product>();
 	 
 	 
