@@ -4,6 +4,7 @@ C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\a
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\AbstractDAO.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\listener\package-info.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\repositories\ProductReviewRepository.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\FileStorageProperties.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\Order.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\SecurityService.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\WebMvcConfig.java
@@ -14,6 +15,7 @@ C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\a
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\controller\UserController.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\repositories\ProductPictureRepository.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\listener\AppContextListener.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\controller\CartController.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\ProductService.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\ProductReview.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\OrderService.java
@@ -38,6 +40,7 @@ C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\a
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\repositories\OrderRepository.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\Product.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\Department.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\customexceptions\package-info.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\CustomUserDetails.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\repositories\UserRepository.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\validator\package-info.java
@@ -45,17 +48,23 @@ C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\a
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\UserService.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\customannotations\ValidPassword.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\Account.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\controller\UploadController.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\repositories\RoleRepository.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\OracleConnection.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\PictureDAOI.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\EmailService.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\validator\UserValidator.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\customannotations\CurrentUser.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\controller\ProductController.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\customannotations\package-info.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\DAO\DepartmentDAOI.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\AuthService.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\OrderDetail.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\CustomAuthenticationProvider.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\service\StorageService.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\customexceptions\MyFileNotFoundException.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\models\Role.java
+C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\customexceptions\FileStorageException.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\controller\SilkController.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\controller\AdminController.java
 C:\Users\Tristan\Documents\Codes\Java\Java_Apps\TheSilkRoute\src\main\java\com\aws\codestar\silkroute\repositories\ProductRepository.java

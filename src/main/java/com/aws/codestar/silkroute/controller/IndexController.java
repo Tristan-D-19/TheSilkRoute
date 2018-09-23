@@ -1,5 +1,7 @@
 package com.aws.codestar.silkroute.controller;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,8 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -46,12 +49,22 @@ public class IndexController {
 	@GetMapping({"/", "/home"})
 public ModelAndView index(HttpSession session) {
 		ModelAndView mav = new ModelAndView("index");
-		if(SecurityContextHolder.getContext().getAuthentication() != null) {
+		if(SecurityContextHolder.getContext().getAuthentication() != null)
+		{
+			 SecurityContext context = SecurityContextHolder.getContext();
+			 Authentication authentication = context.getAuthentication();
+		Object obj =  authentication.getPrincipal();
+		User user = null;
+		if(obj instanceof User) {
+			user = (User) obj;
 		
-		String name = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-			session.setAttribute("name", name);
+			String name = user.getFirstName();
+			if(name!= null)
+				session.setAttribute("name", name);
+			}
 		}
+
+		
 		String txtKeyword = "";
 		session.setAttribute("cart", new HashSet<OrderDetail>());
 		mav.addObject("txtKeyword", txtKeyword);

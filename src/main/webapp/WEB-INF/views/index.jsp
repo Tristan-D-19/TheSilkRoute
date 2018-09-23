@@ -3,7 +3,7 @@
 <%@ page import = "com.aws.codestar.silkroute.service.*" %> 
 <%@page import = "java.util.List"%>
 <%@page import = "com.aws.codestar.silkroute.models.*"%>
-    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>s
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,20 +37,26 @@ User user = (User)session.getAttribute("user");
     
     <%@include file ="authenticated-nav.jsp" %>
   <sec:authentication property="principal.firstName" var="firstName" />
-   hello <span><%=user.getFirstName()%> </span>
+   hello <span></span>
 </sec:authorize>
 <sec:authorize access="!isAuthenticated()">
-
-	<%@include file ="custom-navbar.html" %>	
+	<%@include file ="custom-navbar.jsp"%>	
 </sec:authorize>
+<div class="jumbotron jumbotron-fluid">
+
+    <div class="container">
+        <h1 class="h1-reponsive mb-4 mt-2 blue-text font-bold">The Silk Road</h1>
+        <p class="lead">Welcome to the Silk Road, you may purchase products and services or sell your own!</p>
+    </div>
+
+</div>
 </div>
 <form name="frmSearch" method="post" action="/search">
 <div class="search-box">
     <input class="search-txt" type="text" name="txtKeyword" placeholder="Products, Service, Designs, etc..">
-    <a class="search-btn" href="/search">
-    
+    <button class="search-btn" type='submit' >  
         <i class="fas fa-search"></i> 
-    </a>   
+    </button>   
 </div>
 </form>
 </body>

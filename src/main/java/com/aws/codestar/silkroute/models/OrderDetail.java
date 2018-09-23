@@ -29,6 +29,8 @@ public class OrderDetail{
     public OrderDetail( Product product, int quantity, Order order){
     	this.orderQuantity = quantity;
         this.product = product;
+        this.price = product.getPrice();
+        this.orderQuantity = product.getQuantity();
         this.order = order;
     }
 	public long getOrderId()

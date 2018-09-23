@@ -61,4 +61,10 @@ public class ProductService {
 		prodRepo.save(product2);
 		prodRepo.save(product3);
 	}
+	
+	public Product getProduct(long id) {
+		Product product = prodRepo.findOne(id);
+		
+		return product;
+	}
 }

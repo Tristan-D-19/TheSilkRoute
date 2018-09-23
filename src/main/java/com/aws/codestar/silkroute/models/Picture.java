@@ -1,5 +1,8 @@
 package com.aws.codestar.silkroute.models;
 import javax.persistence.*;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -23,6 +26,9 @@ public class Picture{
 	 @Column(name="image", nullable=false)
 	private String imageUrl;
 
+	 @Column(name="file_directory", length=100)
+	  private String fileDirectory;
+	 
 	 protected Picture() {
 		 
 	 }
@@ -69,4 +75,21 @@ public class Picture{
 	{
 		this.creationDate = creationDate;
 	}
+
+	public String getFileDirectory() {
+		return fileDirectory;
+	}
+
+	public void setFileDirectory(String fileDirectory) {
+		this.fileDirectory = fileDirectory;
+	}
+	
+	public Path getFilePath() {
+	    if (imageUrl == null || fileDirectory == null) {
+	      return null;
+	    }
+			
+	    return Paths.get(fileDirectory, imageUrl);
+	  }
+	
 }

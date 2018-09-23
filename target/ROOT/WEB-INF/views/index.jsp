@@ -3,7 +3,7 @@
 <%@ page import = "com.aws.codestar.silkroute.service.*" %> 
 <%@page import = "java.util.List"%>
 <%@page import = "com.aws.codestar.silkroute.models.*"%>
-    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>s
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +26,8 @@
 
 String keyword = "";
 request.setAttribute("txtKeyword", keyword);
-
+session = request.getSession(); 
+User user = (User)session.getAttribute("user");
 %>
 
 </head>
@@ -36,11 +37,10 @@ request.setAttribute("txtKeyword", keyword);
     
     <%@include file ="authenticated-nav.jsp" %>
   <sec:authentication property="principal.firstName" var="firstName" />
-   hello ${name}
+   hello <span></span>
 </sec:authorize>
 <sec:authorize access="!isAuthenticated()">
-
-	<%@include file ="custom-navbar.html" %>	
+	<%@include file ="custom-navbar.jsp"%>	
 </sec:authorize>
 </div>
 <form name="frmSearch" method="post" action="/search">

@@ -1,4 +1,9 @@
-
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page import = "java.util.*"%>
+<%@page import = "com.aws.codestar.silkroute.models.*"%>
+<%@ page import = "com.aws.codestar.silkroute.service.*" %> 
+<% HashSet<OrderDetail> navcart = (HashSet<OrderDetail>) request.getSession().getAttribute("cart"); %>
 <nav class="navbar navbar-expand-md navbar-light sticky-top bg-light">
     <div class="navbar-header">
 	      <button type="button" class="navbar-toggler " data-toggle="collapse" data-target="#myNavbar">
@@ -12,7 +17,7 @@
 	        <li class="nav-item dropdown">
 	          <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="dropdown_target" href="#">Market <span class="caret"></span></a>
 	          <div class="dropdown-menu" aria-labelledby="dropdown_target">
-	           <a class="dropdown-item" href="/market">Buy</a>
+	           <a class="dropdown-item" href="/market/buy">Buy</a>
 	            <a class="dropdown-item" href="/silk/user/products">Sell</a>
 	            <a class="dropdown-item" href="/silk/user/products">Trade</a>
 	          </div>
@@ -24,7 +29,7 @@
 	      
 	       <li class="nav-item"><a class=" nav-link  btn btn-success btn-sm ml-3" href="/cart">
 	                    <i class="fa fa-shopping-cart"></i> Cart
-	                    <span class="badge badge-light">${cart.getSize()}</span>
+	                    <span class="badge badge-light"><%=navcart.size()%></span>
 	                </a></li>
 	        <li class="nav-item"><a class="nav-link" href="/auth/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 	        <li class="nav-item"><a class="nav-link" href="/auth/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
