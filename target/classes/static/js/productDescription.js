@@ -29,5 +29,12 @@
                 }else{
                     $(".section > div > input").val("1");
                 }
-            })                        
+            })   
+            
+            
+        	$('#addItem').click(function(e){
+        		e.preventDefaults();
+        		$("#cart-form").submit();
+        	});
+        	 
         }) 

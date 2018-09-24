@@ -10,14 +10,12 @@
 <head>
  <%HashSet<OrderDetail> cart = (HashSet<OrderDetail>) request.getSession().getAttribute("cart"); %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<%
 
-	
-%>
 <!------ Include the above in your HEAD tag ---------->
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 <link href="/css/custom-navbar.css" rel="stylesheet">
 <link href="/css/market.css" rel="stylesheet">
 <meta charset="ISO-8859-1">
@@ -78,7 +76,7 @@
     		out.println(" <div class='card mt-4'>");
       			out.println("<img class='card-img-top' src='https://dummyimage.com/600x400/55595c/fff' alt='Card image cap'>");
       			out.println(" <div class='card-body'>");
-      			out.println("<h4 class='card-title'><a href='/products{"+p.getProductId() +"}' title='View Product'" + p.getProductName()+ "</a></h4>");
+      			out.println("<h4 class='card-title'><a href='/products/"+p.getProductId()+"' title='View Product'" + p.getProductName()+ "</a></h4>");
       			out.println("<div class='ratings'>");
                     out.println("<span class='glyphicon glyphicon-star'></span>");
                     out.println("<span class='glyphicon glyphicon-star'></span>");

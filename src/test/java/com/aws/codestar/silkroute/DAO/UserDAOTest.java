@@ -129,7 +129,7 @@ public void should_find_user_by_id() {
 @Test 
 public void should_find_user_by_email(){
 	
-	User user2 = new User("sam@gmail.com", "Sam", "Smith", "password");
+	User user2 = new User("mark@gmail.com", "mark", "Smith", "password");
 	entityManager.persist(user2);
 	Optional<User> foundUser = userRepo.findByEmail(user2.getEmail());
 	assertThat(foundUser.get()).isEqualTo(user2);

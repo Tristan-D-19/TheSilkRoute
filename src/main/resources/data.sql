@@ -1,4 +1,6 @@
 insert into tsr_user (first_name, last_name, password, email, IS_ACTIVE, DATE_JOINED) values ('Admin', 'Admin', '$2a$04$hUeJlRsLaJR1ODxG702ad.A13i/YEU6JSe1JotulOJ.109wS3qisa', 'tristand.thomas19@gmail.com',1 ,CURRENT_TIMESTAMP);
+insert into tsr_user (first_name, last_name, password, email, IS_ACTIVE, DATE_JOINED) values ('Sam', 'Cook', '$2a$04$i3QMMxwTbDmEwTp3qgBaOeTXxB1AhOd1eguH1ngy6SRIVg2i4HKWO', 'sam@gmail.com',1 ,CURRENT_TIMESTAMP);
+insert into tsr_user (first_name, last_name, password, email, IS_ACTIVE, DATE_JOINED) values ('Phillip', 'Bigsby', '$2a$04$2fl4sN/FNYe0dWirVNv3KudThti0zr0SGfSEvlRn1vmTbalEmS8LO', 'phil@gmail.com',1 ,CURRENT_TIMESTAMP);
 insert into tsr_role ( role, role_access) values ( 'ADMIN', 1);
 insert into tsr_role ( role, role_access) values ( 'USER', 0);
 insert into tsr_product (PRICE, PRODUCT_DESCRIPTION, PRODUCT_NAME, QUANTITY) values(200, 'full website design', 'Website', '1');

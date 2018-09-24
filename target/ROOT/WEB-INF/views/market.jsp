@@ -1,3 +1,4 @@
+<%@page import="com.aws.codestar.silkroute.repositories.DepartmentRepository"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import = "java.util.*"%>
@@ -9,19 +10,12 @@
 <head>
  <%HashSet<OrderDetail> cart = (HashSet<OrderDetail>) request.getSession().getAttribute("cart"); %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<%
-	if(request.getParameter("productId") != null){
-		
-		
-	}
 
-
-
-%>
 <!------ Include the above in your HEAD tag ---------->
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 <link href="/css/custom-navbar.css" rel="stylesheet">
 <link href="/css/market.css" rel="stylesheet">
 <meta charset="ISO-8859-1">
@@ -43,6 +37,10 @@
             <div class="card bg-light mb-3">
                 <div class="card-header bg-primary text-white text-uppercase"><i class="fa fa-list"></i> Categories</div>
                 <ul class="list-group category_block">
+                  
+                  <% 
+                 
+                  %>
                     <li class="list-group-item"><a href="/market#engineering">Engineering</a></li>
                     <li class="list-group-item"><a href="/market#webdevelopment">Web Development</a></li>
                     <li class="list-group-item"><a href="/market#photography">Photography</a></li>
@@ -73,12 +71,12 @@
   			List<Product> products = (List<Product>) request.getAttribute("products");
   			  
   				for(Product  p: products) {	
-  	      			out.println("<form action='/cart/add' id='cart-form' style='display:contents;'>");
+  	      			out.println("<form action='/cart/add' id='cart-form' method='POST' style='display:contents;'>");
   		out.println("<div class='col-12 col-md-6 col-lg-4'>");
     		out.println(" <div class='card mt-4'>");
       			out.println("<img class='card-img-top' src='https://dummyimage.com/600x400/55595c/fff' alt='Card image cap'>");
       			out.println(" <div class='card-body'>");
-      			out.println("<h4 class='card-title'><a href='/products{"+p.getProductId() +"}' title='View Product'" + p.getProductName()+ "</a></h4>");
+      			out.println("<h4 class='card-title'><a href='/products/"+p.getProductId()+"' title='View Product'" + p.getProductName()+ "</a></h4>");
       			out.println("<div class='ratings'>");
                     out.println("<span class='glyphicon glyphicon-star'></span>");
                     out.println("<span class='glyphicon glyphicon-star'></span>");
@@ -92,8 +90,8 @@
       			out.println("<p class='btn btn-danger btn-block'>$"+p.getPrice()+"</p>");
       				out.println("</div>");
       			out.println("<div id='cart' class='col'>");
-
-      				out.println("<button class='btn btn-success right' type='submit' id='addItem' name='productId' value='"+p.getProductId() +"' >Add to Cart</button>");
+      			out.println("<input type='hidden' id='addItem' name='productId' value='"+p.getProductId() +"' style='display:none;'></input> ");
+      				out.println("<button class='btn btn-success right' type='submit' id='addItem'  value='submit' >Add to Cart</button>");
       				
       				out.println("</div>");
       			

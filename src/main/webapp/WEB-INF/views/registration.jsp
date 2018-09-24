@@ -13,7 +13,6 @@
 <link href="/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script> 
-<script src="jquery.min.js"></script>
 <link href="/css/reg.css" rel="stylesheet">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
