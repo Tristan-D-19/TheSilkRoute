@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.aws.codestar.silkroute.Application;
 import com.aws.codestar.silkroute.DAO.*;
 import com.aws.codestar.silkroute.models.User;
+import com.aws.codestar.silkroute.repositories.UserRepository;
 import com.aws.codestar.silkroute.service.SecurityService;
 import com.aws.codestar.silkroute.service.UserService;
 import com.aws.codestar.silkroute.validator.UserValidator;
@@ -50,6 +51,9 @@ public class AuthController {
     @Autowired
 	private SecurityService securityService;
 
+    @Autowired
+    private UserRepository userRepo;
+    
     @Resource(name="authenticationManager")
     private AuthenticationManager authManager;
 	
@@ -87,7 +91,7 @@ public class AuthController {
         userValidator.validate(newUser, bindingResult);
         
         ModelAndView reg = new ModelAndView("registration");
-        ModelAndView home = new ModelAndView("user_home");
+        ModelAndView home = new ModelAndView("index");
         ModelAndView login = new ModelAndView("login");	
         
         User userExists = userService.findUserByEmail(newUser.getEmail());
@@ -126,11 +130,12 @@ public class AuthController {
 		        sc.setAuthentication(auth);
 		        HttpSession session = request.getSession(true);
 		        session.setAttribute("SPRING_SECURITY_CONTEXT", sc);
+		        user = userRepo.findByEmail(user.getEmail()).get();
 		        session.setAttribute("user", user);
 		 ModelAndView mav = new ModelAndView();
 	    	
 
-	    			mav.setViewName("user_home");
+	    			mav.setViewName("index");
 
 	    	return mav;
 	    }

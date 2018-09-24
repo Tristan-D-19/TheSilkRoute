@@ -40,6 +40,8 @@ import com.aws.codestar.silkroute.service.*;
 public class UserDAOTest {
 	
 	
+	private UserService userService;
+	
 	@Autowired
 	private TestEntityManager entityManager;
 	
@@ -229,4 +231,13 @@ public void should_find_all_users_read_only() {
 	assertThat(users).hasSize(5).contains(user1,user2, user3, user4, user5);
 	
 }
+
+//@Test 
+//public void should_find_user_by_email_service() {
+//	User user1 = new User("test1", "first", "last", "password");
+//	entityManager.persist(user1);
+//User user = userService.findUserByEmail("test1");
+//assertThat(user).isNotNull();
+//}
+
 }

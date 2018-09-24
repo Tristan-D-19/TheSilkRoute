@@ -31,10 +31,10 @@ public class UserService  {
 	@Autowired
 	private UserRepository userRepo;
 
-	 @Autowired
-	    public UserService(UserRepository userRepo) { 
-	      this.userRepo = userRepo;
-	    }
+//	 @Autowired
+//	    public UserService(UserRepository userRepo) { 
+//	      this.userRepo = userRepo;
+//	    }
     @Autowired
     private RoleRepository roleRepository;
     
@@ -176,8 +176,8 @@ public class UserService  {
 	
 	public User findUserByEmail(String email) {
 		
-		return userRepo.findByEmail(email)
-				.orElse(null);
+		return userRepo.findByEmail(email).get();
+//				.orElse(null);
 	}
 	
 	public User findByConfirmationToken(String confirmationToken) {

@@ -40,19 +40,24 @@ public class UserController {
 
 
 
-    @RequestMapping("{id}")
-    public ModelAndView handleRequestById (@PathVariable("id") long id) {
+    @GetMapping("/profile")
+    public ModelAndView getUserProfile (HttpSession session, String error, @ModelAttribute("user") User user, BindingResult bindingResult) {
 //        model.addAttribute("msg", "user request received for the id : " + id);
 //        LOGGER.info(model.toString());
-    	ModelAndView mav = new ModelAndView("user-profile");
-    	User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	User user = userService.findUserById(id);
-    	if(loggedInUser.getUserId() == id)
+    	user = (User) session.getAttribute("user");
+    	ModelAndView mav = new ModelAndView("profile");
+        if (error != null)
+            mav.addObject("error", "Error loading profile");
+   	
+        if (bindingResult.hasErrors()) { //error return to registration
+            mav.setViewName("index");
+        	return mav;
+        }
+   	
+//    	User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	mav.addObject("user", user);
     		return mav;
-    	else 
-    	return new ModelAndView("unauthorized");
-    			
-    	
+ 	
        
     }
     
