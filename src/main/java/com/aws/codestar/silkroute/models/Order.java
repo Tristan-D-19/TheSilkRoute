@@ -1,71 +1,104 @@
 package com.aws.codestar.silkroute.models;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.*;
 /**
  * This class represents the orders for a customer's purchase
  * 
  */
+
+@Entity
+@Table(name="tsr_order")
+
 public class Order{
 
-    private long order_id;
-    private long customer_id;
-    private Date creation_date;
-    private Date shipping_date;
-    private double order_price;
-
-    //create a new order with the customers id and the current date
-    public Order(long customer_id, Date creationDate){
-
-    }
-	public long getOrder_id()
-	{
-		return this.order_id;
-	}
-
-	public void setOrder_id(long order_id)
-	{
-		this.order_id = order_id;
-	}
-
-	public long getCustomer_id()
-	{
-		return this.customer_id;
-	}
-
-	public void setCustomer_id(long customer_id){
+	@Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long orderId;
 	
-		this.customer_id = customer_id;
+	
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+    private User customer;
+	
+	@Column(name="creation_date", nullable=false)
+    private Date creationDate;
+	
+	@Column(name="shipping_date")
+    private Date shippingDate;
+	
+	@Column(name="order_price", nullable=false)
+    private double orderPrice;
+    
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<OrderDetail> items = new ArrayList<OrderDetail>();
+
+	protected Order() {
+			
+		}
+	
+	//create a new order with the customers id and the current date
+    public Order(User user){
+    	this.creationDate = new Date(Calendar.getInstance().getTime().getTime());
+    	this.customer = user;
+    }
+    public User getCustomer() {
+		return customer;
+	}
+	public void setCustomer(User customer) {
+		this.customer = customer;
+	}
+	public List<OrderDetail> getItems() {
+		return items;
+	}
+	public void setItems(List<OrderDetail> items) {
+		this.items = items;
+	}
+	
+	public long getOrderId()
+	{
+		return this.orderId;
 	}
 
-	public Date getCreation_date()
+	public void setOrderId(long orderId)
 	{
-		return this.creation_date;
+		this.orderId = orderId;
 	}
 
-	public void setCreation_date(Date creation_date)
+
+	public Date getCreationDate()
 	{
-		this.creation_date = creation_date;
+		return this.creationDate;
 	}
 
-	public Date getShipping_date()
+	public void setCreationDate(java.util.Date creationDate)
 	{
-		return this.shipping_date;
+		this.creationDate = creationDate;
+;
 	}
 
-	public void setShipping_date(Date shipping_date)
+	public Date getShippingDate()
 	{
-		this.shipping_date = shipping_date;
+		return this.shippingDate;
 	}
 
-	public double getOrder_price()
+	public void setShippingDate(Date shippingDate)
 	{
-		return this.order_price;
+		this.shippingDate = shippingDate;
 	}
 
-	public void setOrder_price(double order_price)
+	public double getOrderPrice()
 	{
-		this.order_price = order_price;
+		return this.orderPrice;
+	}
+
+	public void setOrderPrice(double orderPrice)
+	{
+		this.orderPrice = orderPrice;
 	}
 
 

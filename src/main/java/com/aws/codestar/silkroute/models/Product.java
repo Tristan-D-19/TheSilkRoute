@@ -1,57 +1,110 @@
 package com.aws.codestar.silkroute.models;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
 /**
  * This class represents a product or service provided by users in the TSR application.
  */
+
+@Entity
+@Table(name="tsr_product")
+
 public class Product{ 
 
+	@Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	 @GeneratedValue(strategy=GenerationType.AUTO)
+//     @SequenceGenerator(name = "product_id_gen", sequenceName = "product_id_gen", initialValue = 50000000, allocationSize = 100)
+    private long productId; 
+	 
+	 @Column(name="product_name", nullable=false)
+    private String productName; 
+	 
+	 @ManyToOne(cascade = {CascadeType.ALL})
+    private User seller;
+	 
+	@ManyToMany(cascade = {CascadeType.ALL})
+	@JoinTable(name = "departments", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "department_id"))
+	private List<Department> departments = new ArrayList<Department>();
+	
 
-    private long product_id; 
-    private String product_name; 
-    private long seller_id; 
-    private long department_id;
+	@Column(name="quantity", nullable=false)
     private int quantity;
+	
+	@Column(name="price", nullable=false)
     private double price;
-    private String product_description;
+    
+    @Column(name="product_description", nullable=false)
+    private String productDescription;
 
-	public long getProduct_id()
-	{
-		return this.product_id;
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<ProductPicture> pictures;
+    
+    @OneToMany(cascade = {CascadeType.ALL})
+    private List<ProductReview> reviews;
+    
+    protected Product() {
+    	
+    }
+    
+    public Product(User user, String productName, String description, double price) {
+    	this.quantity = 1;
+    	this.productName = productName;
+    	this.seller = user; 
+    	this.productDescription = description;
+    	this.price = price;
+    }
+	public List<ProductReview> getReviews() {
+		return reviews;
 	}
 
-	public void setProduct_id( long productId )
-	{
-		this.product_id = productId ;
+	public void setReviews(List<ProductReview> reviews) {
+		this.reviews = reviews;
 	}
 
-	public String getProduct_name()
-	{
-		return this.product_name;
+	public List<ProductPicture> getPictures() {
+		return pictures;
 	}
 
-	public void setProduct_name(String productName )
-	{
-		this.product_name = productName ;
+	public void setPictures(List<ProductPicture> pictures) {
+		this.pictures = pictures;
 	}
 
-	public long getSellerId()
+	public long getProductId()
 	{
-		return this.seller_id;
+		return this.productId;
 	}
 
-	public void setSeller_id(long sellerId )
+	public void setProductId( long productId )
 	{
-		this.seller_id = sellerId ;
+		this.productId = productId ;
 	}
 
-	public long getDepartment_id()
-	{
-		return this.department_id;
+	public List<Department> getDepartments() {
+		return departments;
 	}
 
-	public void setDepartment_id(long departmentId)
-	{
-		this.department_id = departmentId;
+	public void setDepartments(List<Department> departments) {
+		this.departments = departments;
 	}
+	public String getProductName()
+	{
+		return this.productName;
+	}
+
+	public void setProductName(String productName )
+	{
+		this.productName = productName ;
+	}
+	  public User getSeller() {
+			return seller;
+		}
+	
+		public void setSeller(User seller) {
+			this.seller = seller;
+		}
+
 
 	public int getQuantity()
 	{
@@ -67,20 +120,27 @@ public class Product{
 	{
 		return this.price;
 	}
+	
+	public void subtractQuantity(int amount) {
+		this.quantity = this.quantity - amount;
+	}
 
+	public void addToQuantity(int amount) {
+		this.quantity = this.quantity + amount;
+	}
 	public void setPrice(double price)
 	{
 		this.price = price;
 	}
 
-	public String getProduct_description()
+	public String getProductDescription()
 	{
-		return this.product_description;
+		return this.productDescription;
 	}
 
-	public void setProduct_description(String productDescription)
+	public void setProductDescription(String productDescription)
 	{
-		this.product_description = productDescription;
+		this.productDescription = productDescription;
 	}
 
 }

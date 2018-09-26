@@ -1,74 +1,167 @@
 package com.aws.codestar.silkroute.models;
+import java.io.Serializable;
 import java.sql.Date;
-// import javax.persistence.Entity;
-// import javax.persistence.GeneratedValue;
-// import javax.persistence.GenerationType;
-// import javax.persistence.Id;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
+//import java.util.Date;
+ import javax.persistence.Entity;
+ import javax.persistence.GeneratedValue;
+ import javax.persistence.GenerationType;
+ import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer.UserDetailsBuilder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.annotation.Nullable;
+import javax.persistence.*;
 
 /**
  * This class is a representation of the user for TSR. This class contains all data relating to all users.  
  */
-// @Entity
-public class User {
 
-    // @Id
-    // @GeneratedValue(strategy=GenerationType.AUTO)
-    private Long id;
-    private String first_name;
-    private String last_name;
+
+ @Entity
+ @Table(name="tsr_user")
+public class User implements Serializable, UserDetails {
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    private Long userId;
+     
+	 
+     @Column(name="first_name", nullable=false)
+    private String firstName;
+     
+	
+     @Column(name="last_name", nullable=false)
+    private String lastName;
+     
+     
+     @Column(name="email", nullable=false)
     private String email;
+     
+     
+     @Column(name="password", nullable=false)
+//     @ValidPassword
     private String password;
+     
+     @Column(name="address")
     private String address;
-    private String city; 
-    private int zipcode; 
+     @Column(name="city")
+    private String city;
+     @Column(name="zipcode")
+    private Integer zipcode = 0; 
+     @Column(name="state")
     private String state; 
-    private int phone;
-	private int user_type;
-	private Date date_joined;
-	private boolean is_active;
-	private long profile_pic;
+     @Column(name="phone")
+    private String phone;
+     
+     @ManyToMany(cascade = {CascadeType.ALL})
+     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+     private Set<Role> roles;
+     
+     @Column(name="date_joined", nullable=false)
+	private Date dateJoined;
+     
+     @Column(name="is_active", nullable=false)
+	private boolean active;
+     
+     @OneToOne(cascade = {CascadeType.ALL})
+     private Picture profilePic;
+     
+     @Transient //not persisted to DB
+     private String passwordConfirm;
+     
+ 	@Column(name = "confirmation_token")
+ 	private String confirmationToken;
 
+ 	public String getConfirmationToken() {
+ 		return confirmationToken;
+ 	}
+
+ 	public void setConfirmationToken(String confirmationToken) {
+ 		this.confirmationToken = confirmationToken;
+ 	}
     //Constructor 
 
+     public User() {
+    	
+     }
+     
+     public User(User user) {
+    	 this.userId = user.getUserId();
+    	 this.active = true;
+    	 this.address = user.getAddress();
+    	 this.city = user.getAddress();
+    	 this.firstName = user.getFirstName();
+    	 this.lastName = user.getLastName();
+    	 this.email = user.getEmail();
+    	 this.password = user.getPassword();
+    	 
+    	 this.dateJoined = user.getDateJoined();
+    	 this.phone = user.getPhone();
+    	 this.profilePic = user.getProfilePic();
+    	 this.roles = user.getRoles();
+    	 this.state = user.getState();
+    	 this.zipcode = 0;
+//    	 this.zipcode =  ((Integer) user.getZipcode() == null) ? 0: user.getZipcode(); //check for null 
+     }
 	//-----------------------------------------------------------------------------------------------
-      public User() {}
+     
 
       public User(String email, String firstName, String lastName, String password ) {
-          this.first_name = firstName;
-          this.last_name = lastName;
+          this.firstName = firstName;
+          this.lastName = lastName;
           this.password = password;
           this.email = email;
+          this.dateJoined = new Date(Calendar.getInstance().getTime().getTime());
+          this.active = true;
+          this.zipcode = 0;
+//          Set<UserType> types = new HashSet<UserType>();
+//          this.setUserTypes(pending);
       }
   
-	public Long getId()
+	public Long getUserId()
 	{
-		return this.id;
+		return this.userId;
 	}
 
-	public void setId(Long id)
+	public void setUserId(Long id)
 	{
-		this.id = id;
+		this.userId = id;
 	}
 
-	public String getFirst_name()
+	public String getFirstName()
 	{
-		return this.first_name;
+		return this.firstName;
 	}
 
-	public void setFirstname(String firstName)
+	public void setFirstName(String firstName)
 	{
-		this.first_name = firstName;
+		this.firstName = firstName;
 	}
 
-	public String getLastname()
+	public String getLastName()
 	{
-		return this.last_name;
+		return this.lastName;
 	}
 
-	public void setLastname(String lastName)
+	public void setLastName(String lastName)
 	{
-		this.last_name = lastName;
+		this.lastName = lastName;
 	}
 
 	public String getEmail()
@@ -111,12 +204,12 @@ public class User {
 		this.city = city;
 	}
 
-	public int getZipcode()
+	public Integer getZipcode()
 	{
 		return this.zipcode;
 	}
 
-	public void setZipcode(int zipcode)
+	public void setZipcode(Integer zipcode)
 	{
 		this.zipcode = zipcode;
 	}
@@ -131,78 +224,140 @@ public class User {
 		this.state = state;
 	}
 
-	public int getPhone()
+	public String getPhone()
 	{
 		return this.phone;
 	}
 
-	public void setPhone(int phone)
+	public void setPhone(String phone)
 	{
 		this.phone = phone;
 	}
 
-	public int getUser_type()
+	public Set<Role> getRoles()
 	{
-		return this.user_type;
+		return this.roles;
 	}
 
-	public void setUser_type(int userType)
+	public void setRoles(Set<Role> roles)
 	{
-		this.user_type = userType;
+		this.roles = roles;
 	}
 
-	public Date getDate_joined(){
-		return date_joined;
+	public Date getDateJoined(){
+		
+		return dateJoined;
 	}
-	public void setDate_joined(Date dateJoined) {
-		this.date_joined = dateJoined;
-	}
-
-	public boolean getIs_active() {
-		return is_active;
+	public void setDateJoined(Date dateJoined) {
+		this.dateJoined = dateJoined;
 	}
 
-	public void setIs_active(boolean is_active) {
-		this.is_active = is_active;
+	public boolean getActive() {
+		return active;
+	}
+
+	public void setActive(boolean is_active) {
+		this.active = is_active;
 	}
 	
-	public long getProfilePic() {
-		return profile_pic;
+	public Picture getProfilePic() {
+		return profilePic;
 	}
-	public void setProfilePic(long pic) {
-		this.profile_pic = pic;
+	public void setProfilePic(Picture pic) {
+		this.profilePic = pic;
 	}
     @Override
     public String toString() {
         return String.format(
                 "User[id=%d, firstName='%s', lastName='%s']",
-                id, first_name, last_name);
+                userId, firstName, lastName);
     }
     
-    @Override
-    public boolean equals(Object obj) {
-    	if (obj instanceof User) {
-    		User other = (User) obj;
-    		boolean same_id = (this.id == other.getId());
-    	    boolean same_f_name = (this.first_name == other.getFirst_name());
-    	    boolean same_l_name = (this.last_name == other.getLastname());
-    	    boolean same_email = (this.email == other.getEmail());
-    	    boolean same_pass = (this.password == other.getPassword());
-    	    boolean same_address = (this.address == other.getAddress());
-    	    boolean same_city = (this.city == other.getCity());
-    	    boolean same_zip = (this.zipcode == other.getZipcode());
-    	    boolean same_phone = (this.phone == other.getPhone());
-    	    boolean same_u_type = (this.user_type == other.getUser_type());
-    	    boolean same_date_joined = (this.date_joined == other.getDate_joined());
-    	    boolean same_pic = (this.profile_pic == other.getProfilePic());
-    	    	
-    	    if(same_address && same_city && same_date_joined && same_email && 
-    	    		same_f_name && same_l_name && same_id && same_pass && same_phone &&
-    	    		same_u_type && same_zip && same_pic) return true;
-    	    		else return false;
-    	}
-    	else return false;
-    
+//    @Override
+//    public boolean equals(Object obj) {
+//    	if (obj instanceof User) {
+//    		User other = (User) obj;
+//    		boolean same_id = (this.userId == other.getUserId());
+//    	    boolean same_f_name = (this.firstName == other.getFirstName());
+//    	    boolean same_l_name = (this.lastName == other.getLastName());
+//    	    boolean same_email = (this.email == other.getEmail());
+//    	    boolean same_pass = (this.password == other.getPassword());
+//    	    boolean same_address = (this.address == other.getAddress());
+//    	    boolean same_city = (this.city == other.getCity());
+//    	    boolean same_zip = (this.zipcode == other.getZipcode());
+//    	    boolean same_phone = (this.phone == other.getPhone());
+//    	    boolean same_role = (this.roles == other.getRoles());
+//    	    boolean same_date_joined = (this.dateJoined == other.getDateJoined());
+//    	    boolean same_pic = (this.profilePic == other.getProfilePic());
+//    	    	
+//    	    if(same_address && same_city && same_date_joined && same_email && 
+//    	    		same_f_name && same_l_name && same_id && same_pass && same_phone &&
+//    	    		sameRole && same_zip && same_pic) return true;
+//    	    		else return false;
+//    	}
+//    	else return false;
+//    
+//    }
+
+
+    public void setPasswordConfirm(String password2) {
+    	this.passwordConfirm = password2;
     }
+	public String getPasswordConfirm() {
+		
+		return passwordConfirm;
+	}
+
+
+	public String getName() {
+		
+		return this.firstName +" " + this.lastName;
+		
+	}
+
+
+	public static UserDetailsBuilder withDefaultPasswordEncoder() {
+		
+		return null;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		return this.roles
+				.stream()
+				.map(role -> new SimpleGrantedAuthority("ROLE_"+role.getRole()))
+				.collect(Collectors.toList());
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 }

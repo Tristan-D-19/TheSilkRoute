@@ -1,43 +1,78 @@
 package com.aws.codestar.silkroute.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
 /**
  * This Class is a representation of a user's account. The account handles transactions and other financial information. 
  *
  */
+@Entity
+@Table(name="tsr_account")
 public class Account {
-    private long account_id;
-    private long user_id;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long accountId;
+	
+	@OneToOne(cascade = {CascadeType.ALL})
+    private User user;
+	
+	
+	@OneToMany
+	private List<BillingInfo> billingInfos;
+
+	@Column(name="balance", nullable=false)
     private double balance; 
 
 
-    public Account(long accountId, long userId){ 
-        account_id = accountId;
-        user_id = userId;
+    public Account(double balance, User user){ 
+        this.balance = balance;
+        this.user = user;
     }
  
-	public long getAccount_id()
+    protected Account() {
+    	
+    }
+    
+	public long getAccountId()
 	{
-		return this.account_id;
+		return this.accountId;
+	}
+	
+	public User getUser() {
+		return user;
 	}
 
-	public void setAccount_id(long accountId)
-	{
-		this.account_id = accountId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public long getUser_id()
+	public void setAccountId(long accountId)
 	{
-		return this.user_id;
+		this.accountId = accountId;
 	}
 
-	public void setUserid(long userId)
-	{
-		this.user_id = userId;
+	public void deposit (double amount) {
+		this.balance = this.balance + amount;
 	}
 
+	public void withdraw (double amount)
+	{
+		this.balance = this.balance - amount;
+	}
 	public double getBalance()
 	{
 		return this.balance;
+	}
+
+	public List<BillingInfo> getBillingInfos() {
+		return billingInfos;
+	}
+
+	public void setBillingInfos(List<BillingInfo> billingInfos) {
+		this.billingInfos = billingInfos;
 	}
 
 	public void setBalance(double balance )

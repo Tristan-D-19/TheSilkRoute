@@ -1,88 +1,121 @@
 package com.aws.codestar.silkroute.models;
 import java.sql.Date;
+import java.util.Calendar;
+
+import javax.persistence.*;
 /**
  * This class is a representation of billing information for a user's account. No credit card information is stored within. 
  * We will use Stripe for processing transaction and passing this information to stripe; 
  */
+
+@Entity
+@Table(name="tsr_billing_info")
+
 public class BillingInfo{ 
 
-    private long billing_id;
-    private long acc_id;
-    private String billing_address;
-    private String billing_state; 
-	private long stripe_id;
-	private Date billing_date;
-	private int billing_zip;
+	@Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long billingId;
+	
+	@ManyToOne(cascade = {CascadeType.ALL})
+    private Account account;
+	
+	@Column(name="billing_address")
+    private String billingAddress;
+	
+	@Column(name="billing_state")
+    private String billingState; 
+	
+	@Column(name="stripe_id")
+	private long stripeId;
+	@Column(name="billing_date")
+	private Date billingDate;
+	
+	@Column(name="billing_zip")
+	private int billingZip;
 
 
-	public int getBilling_zip()
-	{
-		return this.billing_zip;
+	public BillingInfo(String billingAddress, String billingState,
+			int billingZip) {
+		super();
+		this.billingAddress = billingAddress;
+		this.billingState = billingState;
+
+		this.billingDate = new Date(Calendar.getInstance().getTime().getTime());;
+		this.billingZip = billingZip;
 	}
 
-	public void setBilling_zip(int billing_zip)
+	protected BillingInfo() {
+		
+	}
+	public int getBillingZip()
 	{
-		this.billing_zip = billing_zip;
+		return this.billingZip;
 	}
 
-	public Date getBilling_date()
+	public void setBillingZip(int billingZip)
 	{
-		return this.billing_date;
+		this.billingZip = billingZip;
 	}
 
-	public void setBilling_date(Date billing_date)
+	public Date getBillingDate()
 	{
-		this.billing_date = billing_date;
+		return this.billingDate;
 	}
 
-	public long getBilling_id()
+	public void setBillingDate(Date billingDate)
 	{
-		return this.billing_id;
+		this.billingDate = billingDate;
 	}
 
-	public void setBilling_id(long billing_id)
+	public long getBillingId()
 	{
-		this.billing_id = billing_id;
+		return this.billingId;
 	}
 
-	public long getAcc_id()
+	public void setBillingId(long billingId)
 	{
-		return this.acc_id;
+		this.billingId = billingId;
 	}
 
-	public void setAcc_id(long acc_id)
+	public Account getAccount()
 	{
-		this.acc_id = acc_id;
+		return this.account;
 	}
 
-	public String getBilling_address()
+	public void setAccount(Account account)
 	{
-		return this.billing_address;
+		this.account = account;
 	}
 
-	public void setBilling_address(String billing_address)
+	public String getBillingAddress()
 	{
-		this.billing_address = billing_address;
+		return this.billingAddress;
 	}
 
-	public String getBilling_state()
+	public void setBillingAddress(String billingAddress)
 	{
-		return this.billing_state;
+		this.billingAddress = billingAddress;
 	}
 
-	public void setBilling_state(String billing_state )
+	public String getBillingState()
 	{
-		this.billing_state = billing_state ;
+		return this.billingState;
 	}
 
-	public long getStripe_id()
+	public void setBillingState(String billingState )
 	{
-		return this.stripe_id;
+		this.billingState = billingState ;
 	}
 
-	public void setStripe_id(long stripe_id)
+	public long getStripeId()
 	{
-		this.stripe_id = stripe_id;
+		return this.stripeId;
+	}
+
+	public void setStripeId(long stripeId)
+	{
+		this.stripeId = stripeId;
 	}
  
 }

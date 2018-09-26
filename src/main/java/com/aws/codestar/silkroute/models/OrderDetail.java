@@ -1,36 +1,55 @@
 package com.aws.codestar.silkroute.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="tsr_order_detail")
 
 public class OrderDetail{ 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long orderId;
+	 
+	@OneToOne(cascade = {CascadeType.ALL})
+    private Product product;
+   
+	@ManyToOne(cascade = {CascadeType.ALL})
+	private Order order;
 
-    private long order_id;
-    private long product_id;
-    private double price;
-    private int order_quantity;
+	@Column(name="price", nullable=false)
+	private double price;
+	
+	@Column(name="quantity", nullable=false)
+    private int orderQuantity;
 
-    public OrderDetail(long order_id, long product_id){
-        this.order_id = order_id;
-        this.product_id = product_id;
+	protected OrderDetail(){
+		
+	}
+	
+    public OrderDetail( Product product, int quantity, Order order){
+    	this.orderQuantity = quantity;
+        this.product = product;
+        this.price = product.getPrice();
+        this.orderQuantity = product.getQuantity();
+        this.order = order;
     }
-	public long getOrder_id()
+	public long getOrderId()
 	{
-		return this.order_id;
+		return this.orderId;
 	}
 
-	public void setOrder_id(long order_id)
+	public void setOrderId(long orderId)
 	{
-		this.order_id = order_id;
+		this.orderId = orderId;
+	}
+	
+ public Product getProduct() {
+		return product;
+	}
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
-	public long getProduct_id()
-	{
-		return this.product_id;
-	}
-
-	public void setProduct_id(long product_id)
-	{
-		this.product_id = product_id;
-	}
 
 	public double getPrice()
 	{
@@ -42,14 +61,26 @@ public class OrderDetail{
 		this.price = price;
 	}
 
-	public int getOrder_quantity()
+	public int getOrderQuantity()
 	{
-		return this.order_quantity;
+		return this.orderQuantity;
 	}
 
-	public void setOrder_quantity(int order_quantity)
+	public void setOrderQuantity(int order_quantity)
 	{
-		this.order_quantity = order_quantity;
+		this.orderQuantity = order_quantity;
+	}
+	
+	public void setItemPrice() {
+		this.price = this.product.getPrice() * this.orderQuantity;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 }

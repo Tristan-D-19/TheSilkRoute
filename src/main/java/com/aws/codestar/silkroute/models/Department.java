@@ -1,32 +1,63 @@
 package com.aws.codestar.silkroute.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name="tsr_department")
+
 public class Department{
 
-    private long department_id;
-    private String department_name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long departmentId;
+	 	
+
+	@Column(name="department_name", nullable=false)
+    private String departmentName;
+	 
+	 @Column(name="description", nullable=false)
     private String description; 
     
-
-	public long getDepartment_id()
+	 @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "departments")
+	 private Set<Product> products = new HashSet<Product>();
+	 
+	 
+	 protected Department() {
+		 
+	 }
+	 public Department( String departmentName, String description) {
+			this.departmentName = departmentName;
+			this.description = description;
+		}
+	public long getDepartmentId()
 	{
-		return this.department_id;
+		return this.departmentId;
 	}
 
-	public void setDepartment_id(long department_id)
+	public void setDepartmentId(long departmentId)
 	{
-		this.department_id = department_id;
+		this.departmentId = departmentId;
 	}
 
-	public String getDepartment_name()
+	public String getDepartmentName()
 	{
-		return this.department_name;
+		return this.departmentName;
 	}
 
-	public void setDepartment_name(String department_name)
+	public void setDepartmentName(String departmentName)
 	{
-		this.department_name = department_name;
+		this.departmentName = departmentName;
 	}
 
+	public Set<Product> getProducts() {
+		return products;
+	}
+	public void setProducts(Set<Product> products) {
+		this.products = products;
+	}
 	public String getDescription()
 	{
 		return this.description;

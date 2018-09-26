@@ -1,52 +1,95 @@
 package com.aws.codestar.silkroute.models;
+import javax.persistence.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Date;
-import java.sql.Blob;
+import java.util.Calendar;
+
+
+@Entity
+@Table(name="tsr_picture")
+
 public class Picture{
 
-    private long picture_id;
-    private long owner_id;
-    private Date creation_date;
-	private Blob image;
+	@Id
+	 @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long pictureId;
+	 
+	 
+	 @ManyToOne(cascade = {CascadeType.ALL})
+    private User user;
+ 
+	 @Column(name="creation_date", nullable=false)
+	private Date creationDate;
+	 
+	 @Column(name="image", nullable=false)
+	private String imageUrl;
+
+	 @Column(name="file_directory", length=100)
+	  private String fileDirectory;
+	 
+	 protected Picture() {
+		 
+	 }
+	
+	public Picture(User user, String imageUrl) {
+		this.creationDate = new Date(Calendar.getInstance().getTime().getTime());
+		this.user = user;
+		this.imageUrl = imageUrl;
+	}
+	
+	public String getImageUrl()
+	{
+		return this.imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl)
+	{
+		this.imageUrl = imageUrl;
+	}
+	public User getUser() {
+			return user;
+		}
+	
+		public void setUser(User user) {
+			this.user = user;
+		}
+	public long getPictureId()
+	{
+		return this.pictureId;
+	}
+
+	public void setPictureId(long pictureId)
+	{
+		this.pictureId = pictureId;
+	}
 
 	
-	public Blob getImage()
+	public Date getCreationDate()
 	{
-		return this.image;
+		return this.creationDate;
 	}
 
-	public void setImage(Blob image)
+	public void setCreationDate(Date creationDate)
 	{
-		this.image = image;
+		this.creationDate = creationDate;
 	}
 
-	public long getPicture_id()
-	{
-		return this.picture_id;
+	public String getFileDirectory() {
+		return fileDirectory;
 	}
 
-	public void setPicture_id(long picture_id)
-	{
-		this.picture_id = picture_id;
+	public void setFileDirectory(String fileDirectory) {
+		this.fileDirectory = fileDirectory;
 	}
-
-	public long getOwner_id()
-	{
-		return this.owner_id;
-	}
-
-	public void setOwner_id(long owner_id)
-	{
-		this.owner_id = owner_id;
-	}
-
-	public Date getCreation_date()
-	{
-		return this.creation_date;
-	}
-
-	public void setCreation_date(Date creation_date)
-	{
-		this.creation_date = creation_date;
-	}
+	
+	public Path getFilePath() {
+	    if (imageUrl == null || fileDirectory == null) {
+	      return null;
+	    }
+			
+	    return Paths.get(fileDirectory, imageUrl);
+	  }
+	
 }
