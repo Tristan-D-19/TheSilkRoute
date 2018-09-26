@@ -1,92 +1,42 @@
-Welcome to the AWS CodeStar sample web service
+Welcome to the Silk Route
 ==============================================
 
-This sample code helps get you started with a simple Java web service
-deployed by AWS Elastic Beanstalk.
+
 
 What's Here
 -----------
-
-This sample includes:
-
-* README.md - this file
-* .ebextensions/ - this directory contains configuration files that
-  allows AWS Elastic Beanstalk to deploy your Java service
-* buildspec.yml - this file is used by AWS CodeBuild to build the web
-  service
-* pom.xml - this file is the Maven Project Object Model for the web service
-* src/main - this directory contains your Java service source files
-* src/test - this directory contains your Java service unit test files
 
 
 Getting Started
 ---------------
 
-These directions assume you want to develop on your local computer, and not
-from the Amazon EC2 instance itself. If you're on the Amazon EC2 instance, the
-virtual environment is already set up for you, and you can start working on the
-code.
+1. Build the application 
 
-To work on the sample code, you'll need to clone your project's repository to your
-local computer. If you haven't, do that first. You can find instructions in the
-AWS CodeStar user guide.
+       $mvn clean pacakge
 
-1. Install maven.  See https://maven.apache.org/install.html for details.
+2. If you are using eclipse click the project folder and run as Spring Boot app
 
-2. Install tomcat.  See https://tomcat.apache.org/tomcat-7.0-doc/setup.html for
-   details.
+or from the terminal 
+        
+        $mvn spring-boot:run
 
-3. Build the service.
 
-        $ mvn -f pom.xml compile
-        $ mvn -f pom.xml package
 
-4. Copy the built service to the Tomcat webapp directory.  The actual
-   location of that directory will vary depending on your platform and
-   installation.
+3. Open http://127.0.0.1:8080/ in a web browser to view your service.
 
-        $ cp target/ROOT.war <tomcat webapp directory>
+4. Once in the application you may register a new User or use one of the built in Users. 
 
-4. Restart your tomcat server
+sam@gmail.com, "Password"
+mike@gmail.com "Password"
 
-5. Open http://127.0.0.1:8080/ in a web browser to view your service.
 
-What Do I Do Next?
-------------------
+5. You may use the search bar on the homepage to search items, or you may head straight to the market. 
 
-Once you have a virtual environment running, you can start making changes to
-the sample Java web service. We suggest making a small change to
-/src/main/java/com/aws/codestar/projecttemplates/controller/HelloWorldController.java
-first, so you can see how changes pushed to your project's repository are automatically
-picked up and deployed to the Amazon EC2 instance by AWS Elastic Beanstalk. (You can
-watch the progress on your project dashboard.) Once you've seen how that works, start
-developing your own code, and have fun!
+6. From the market you may add items to your cart for checkout.
 
-To run your tests locally, go to the root directory of the sample code and run the
-`mvn clean compile test` command, which AWS CodeBuild also runs through your `buildspec.yml` file.
+7. Once at checkout you may create an order by entering Billing information. 
 
-To test your new code during the release process, modify the existing tests or add tests
-to the tests directory. AWS CodeBuild will run the tests during the build stage of your
-project pipeline. You can find the test results in the AWS CodeBuild console.
 
-Learn more about Maven's [Standard Directory Layout](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html).
 
-Learn more about AWS CodeBuild and how it builds and tests your application here:
-https://docs.aws.amazon.com/codebuild/latest/userguide/concepts.html
 
-Learn more about AWS CodeStar by reading the user guide.  Ask questions or make
-suggestions on our forum.
 
-User Guide: http://docs.aws.amazon.com/codestar/latest/userguide/welcome.html
-
-Forum: https://forums.aws.amazon.com/forum.jspa?forumID=248
-
-What Should I Do Before Running My Project in Production?
-------------------
-
-AWS recommends you review the security best practices recommended by the framework
-author of your selected sample application before running it in production. You
-should also regularly review and apply any available patches or associated security
-advisories for dependencies used within your application.
-
-Best Practices: https://docs.aws.amazon.com/codestar/latest/userguide/best-practices.html?icmpid=docs_acs_rm_sec
